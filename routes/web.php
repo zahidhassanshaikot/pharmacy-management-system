@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', 'DeshboardController@index')->name('/');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/manage/stock', 'HomeController@index')->name('home');
+Route::get('/manage/stock', 'ManageStock@index')->name('manage-stock');
 });
 
 });
