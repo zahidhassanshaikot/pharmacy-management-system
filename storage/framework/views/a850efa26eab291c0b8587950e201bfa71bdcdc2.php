@@ -108,6 +108,22 @@
 		<!-- Examples -->
 		<script src="<?php echo e(asset('back-end')); ?>/js/examples/examples.dashboard.js"></script>
 
+
+<script>
+function goBack() {
+    window.history.back();
+}
+
+    function btnToggleFunction() {
+        $('#IdToggleBtn').slideToggle(1000);
+    }
+    setTimeout(function() {
+        $('#message').fadeOut('slow');
+    }, 3000);
+</script>
+
+
+
 	</body>
 
 <!-- Mirrored from preview.oklerthemes.com/porto-admin/2.1.1/layouts-left-sidebar-panel-light.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Aug 2018 11:39:13 GMT -->

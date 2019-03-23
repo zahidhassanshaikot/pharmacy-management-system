@@ -6,7 +6,7 @@
             
                 <ul class="nav nav-main">
                     <li>
-                        <a href="layouts-default.html">
+                        <a href="<?php echo e(route('/')); ?>">
                             <i class="fas fa-home" aria-hidden="true"></i>
                             <span>Dashboard</span>
                         </a>                        
@@ -14,16 +14,16 @@
                     <li class="nav-parent nav-expanded nav-active">
                         <a href="#">
                             <i class="fas fa-columns" aria-hidden="true"></i>
-                            <span>Layouts</span>
+                            <span>Stock</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a href="index.html">
-                                    Landing Page
+                                <a href="<?php echo e(route('manage-stock')); ?>">
+                                    Manage Stock
                                 </a>
                             </li>
                             <li>
-                                <a href="layouts-default.html">
+                                <a href="<?php echo e(route('/')); ?>">
                                     Default
                                 </a>
                             </li>

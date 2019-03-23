@@ -1,7 +1,7 @@
    
 
 <?php $__env->startSection('title'); ?>
-E-commarce
+PMS
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('appUser'); ?>
 active
@@ -13,7 +13,7 @@ active
         <div class="right-wrapper">
             <ol class="breadcrumbs">
                 <li>
-                    <a href="index.html">
+                    <a href="<?php echo e(route('/')); ?>">
                         <i class="fas fa-home"></i>
                     </a>
                 </li>

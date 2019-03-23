@@ -6,7 +6,7 @@
             
                 <ul class="nav nav-main">
                     <li>
-                        <a href="layouts-default.html">
+                        <a href="{{ route('/') }}">
                             <i class="fas fa-home" aria-hidden="true"></i>
                             <span>Dashboard</span>
                         </a>                        
@@ -14,16 +14,16 @@
                     <li class="nav-parent nav-expanded nav-active">
                         <a href="#">
                             <i class="fas fa-columns" aria-hidden="true"></i>
-                            <span>Manage Stock</span>
+                            <span>Stock</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a href="index.html">
-                                    Landing Page
+                                <a href="{{ route('manage-stock') }}">
+                                    Manage Stock
                                 </a>
                             </li>
                             <li>
-                                <a href="layouts-default.html">
+                                <a href="{{ route('/') }}">
                                     Default
                                 </a>
                             </li>

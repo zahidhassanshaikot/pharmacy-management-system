@@ -14,11 +14,12 @@
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:Super Admin|Admin|Employee'], function () {
 
-Route::get('/', 'DeshboardController@index')->name('/');
+        Route::get('/', 'DeshboardController@index')->name('/');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/manage/stock', 'ManageStock@index')->name('manage-stock');
-});
+        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/manage/stock', 'ManageStockController@manageStock')->name('manage-stock');
+        Route::post('/add/product', 'ManageStockController@addProduct')->name('add-product');
+    });
 
 });
 
