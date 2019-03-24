@@ -18,13 +18,13 @@ active
                     </a>
                 </li>
                 <li><span>Layouts</span></li>
-                <li><span>Manage Stock</span></li>
+                <li><span>update Stock</span></li>
             </ol>
     
             
         </div>
     
-        <h2>Manage Stock</h2>
+        <h2>Update Stock</h2>
     </header>
 
     <!-- start: page -->
@@ -48,13 +48,11 @@ active
                         </ul>
                     </div>
                 <?php endif; ?>
-                <div onclick="btnToggleFunction()" class="panel-header btn btn-default btn-block" style="padding: 0px 6px;font-size: 12px;">
-                    <a><h4 class="center"><i class="fa fa-plus" aria-hidden="true" ></i> &nbsp Add New Product</h4></a>
-                </div>
+    
                 <div class="container">
-                    <div id="IdToggleBtn" style="display:none" class="panel-body col-md-12 ">
+                    <div class="panel-body col-md-12 ">
                         <br/>
-                        <form action="<?php echo e(route('add-product')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="<?php echo e(route('update-product')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <?php echo e(csrf_field()); ?>
 
 
@@ -65,7 +63,8 @@ active
                                     </div>
 
                                     <div class="form-group col-md-9">
-                                        <input type="text" class="form-control" name="product_name" required>
+                                        <input type="text" class="form-control" value="<?php echo e($obj_product->product_name); ?>" name="product_name" required>
+                                        <input type="hidden" class="form-control"value="<?php echo e($obj_product->id); ?>" name="product_id" required>
                                         <span class="text-danger"><?php echo e($errors->has('product_name') ? $errors->first('product_name') : ' '); ?></span>
                                     </div>
                                 </div>
@@ -78,7 +77,7 @@ active
                                     </div>
 
                                     <div class="form-group col-md-9">
-                                        <input type="text" class="form-control" name="product_price" required>
+                                        <input type="text" class="form-control" value="<?php echo e($obj_product->product_price); ?>" name="product_price" required>
                                         <span class="text-danger"><?php echo e($errors->has('product_price') ? $errors->first('product_price') : ' '); ?></span>
                                     </div>
                                 </div>
@@ -91,7 +90,7 @@ active
                                     </div>
 
                                     <div class="form-group col-md-9">
-                                        <input type="text" class="form-control" name="product_quantity" required>
+                                        <input type="text" class="form-control"value="<?php echo e($obj_product->product_quantity); ?>" name="product_quantity" required>
                                         <span class="text-danger"><?php echo e($errors->has('product_quantity') ? $errors->first('product_quantity') : ' '); ?></span>
                                     </div>
                                 </div>
@@ -102,7 +101,7 @@ active
                                     <label class="control-label col-md-3"> Product Description</label>
 
                                     <div class="form-group col-md-9">
-                                        <textarea class="form-control" name="product_description" ></textarea>
+                                        <textarea class="form-control" name="product_description" ><?php echo e($obj_product->product_description); ?></textarea>
                                         <span class="text-danger"><?php echo e($errors->has('product_description') ? $errors->first('product_description') : ' '); ?></span>
                                     </div>
                                 </div>
@@ -115,6 +114,9 @@ active
                                     <div class="form-group col-md-9">
                                         <input type="file" class="form-control" title="Image Should be 400*400 px" name="product_image">
                                         <span class="text-danger"><?php echo e($errors->has('product_image') ? $errors->first('product_image') : ' '); ?></span>
+                                         <?php if( $obj_product-> product_image!=null): ?>
+                                        <img src="<?php echo e(asset($obj_product-> product_image)); ?>" class="img-thumbnail" alt="image" style="height:80px;wide:80px">
+                                        <?php endif; ?> 
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +137,7 @@ active
                                 <div class="row">
                                     <label class="control-label col-md-3"></label>
                                     <div class="form-group col-md-9">
-                                        <input type="submit" value="Save Product Info"
+                                        <input type="submit" value="update Product Info"
                                                class="btn btn-success btn-block" name="btn">
                                     </div>
                                 </div>
@@ -147,78 +149,7 @@ active
         </div>
     </div>
     </div>
-    <br/>
-    <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class=" card panel-default">
-                <div class="card-header">
-                    <h3 class="center">Products</h3>
-                </div>
-                <div class="card-body">
 
-                    <table class="table table-striped">
-                        <tr class="text-primary">
-                            <th>SL no</th>
-                            <th>Product Name</th>
-                            <th>Product Price</th>
-                            <th>Product Quantity</th>
-                            <th>Product description</th>
-                            <th>Product Image</th>
-                            <th>Publication Status</th>
-                            <th>Action</th>
-                        </tr>
-                          <?php ($i = $obj_product->perPage() * ($obj_product->currentPage() - 1)); ?>
-                       <?php $__currentLoopData = $obj_product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <td><?php echo e(++$i); ?></td>
-                                <td><?php echo e($product-> product_name); ?></td>
-                                <td><?php echo e($product-> product_price); ?></td>
-                                <td><?php echo e($product-> product_quantity); ?></td>
-                                <td><?php echo e($product-> product_description); ?></td>
-                                <td>
-                                    <?php if( $product-> product_image!=null): ?>
-                                    <img src="<?php echo e(asset($product-> product_image)); ?>" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    <?php else: ?> 
-                                    <img src="<?php echo e(asset('images/medicine.png')); ?>" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    <?php endif; ?>
-                                    </td>
-                                <td><?php echo e($product-> publication_status==1 ? 'Published':'Unpublished'); ?></td>
-
-                                <td>
-                                    <?php if($product-> publication_status==1): ?>
-                                        <a href="<?php echo e(route('unpublished-product',['id'=>$product->id])); ?>" data-toggle="tooltip" data-placement="top"
-                                           class="btn btn-info btn-xs" title="Unpublished">
-                                            <span class="fa fa-arrow-up"></span>
-                                        </a>
-                                    <?php else: ?>
-                                        <a href="<?php echo e(route('published-product',['id'=>$product->id])); ?>" data-toggle="tooltip" data-placement="top"
-                                           class="btn btn-warning btn-xs"title="Published">
-                                            <span class="fa fa-arrow-down"></span>
-                                        </a>
-                                    <?php endif; ?>
-                                    <a href="<?php echo e(url('admin/product/edit/'.$product->id)); ?>" data-toggle="tooltip" data-placement="top"
-                                       class="btn btn-success btn-xs" title="Edit">
-                                        <span class="fa fa-edit"></span>
-                                    </a> 
-                                    <a href="<?php echo e(route('delete-product',['id'=>$product->id])); ?>"data-toggle="tooltip" data-placement="top"
-                                       class="btn btn-danger btn-xs" title="Delete">
-                                        <span class="fa fa-trash"></span>
-                                    </a>
-                                 </td>
-                            </tr>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
-                    </table>
-                     <div class="float-right">
-                        <?php echo e($obj_product->links()); ?>
-
-                    </div> 
-                </div>
-
-            </div>
-        </div>
-    </div>
-    </div>
 
    
 </section>
