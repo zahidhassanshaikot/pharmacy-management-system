@@ -26,6 +26,13 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/admin/product/edit/{id}', 'ManageStockController@editProduct')->name('edit-product');
         Route::post('/admin/product/update', 'ManageStockController@updateProduct')->name('update-product');
+
+
+        Route::get('/sale-product', 'ProductSaleController@saleProduct')->name('sale-product');
+        Route::get('/get-product-cost/{id}', 'ProductSaleController@getProductCost')->name('get-product-cost');
+
+        Route::post('/add-to-cart', 'CartController@addToCart')->name('add-to-cart');
+        Route::get('/delete-cart-item/{id}', 'CartController@removeFromCart')->name('delete-cart-item');
     });
 
 });

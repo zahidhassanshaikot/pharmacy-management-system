@@ -3,8 +3,8 @@
 @section('title')
 Manage Stock
 @endsection
-@section('appUser')
-active
+@section('activeStock')
+nav-expanded nav-active
 @endsection
 @section('content')
 

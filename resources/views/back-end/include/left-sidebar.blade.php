@@ -11,7 +11,7 @@
                             <span>Dashboard</span>
                         </a>                        
                     </li>
-                    <li class="nav-parent nav-expanded nav-active">
+                    <li class="nav-parent @yield('activeStock')">
                         <a href="#">
                             <i class="fas fa-columns" aria-hidden="true"></i>
                             <span>Stock</span>
@@ -22,11 +22,7 @@
                                     Manage Stock
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('/') }}">
-                                    Default
-                                </a>
-                            </li>
+                          
                             {{-- <li class="nav-parent">
                                 <a>
                                     Boxed
@@ -47,8 +43,26 @@
 
                         </ul>
 
+                    </li>
+                    <li class="nav-parent @yield('activeSaleProduct')">
+                        <a href="#">
+                            <i class="fas fa-columns" aria-hidden="true"></i>
+                            <span>Sale Product</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="{{ route('sale-product') }}">
+                                    Sale Product
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('/') }}">
+                                    Default
+                                </a>
+                            </li>
+  
 
-
+                        </ul>
 
                     </li>
 

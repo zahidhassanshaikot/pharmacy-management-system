@@ -71,9 +71,9 @@ class ManageStockController extends Controller
     }
     public function deleteProduct($id){
             $obj_product=Product::find($id);
-               if (File::exists($obj_product->product_image)) {
-                unlink($obj_product->product_image);
-            }
+            //    if (File::exists($obj_product->product_image)) {
+            //     unlink($obj_product->product_image);
+            // }
             $obj_product->delete();
     
             return redirect()->back()->with('message','Product Info Save successfully deleted');

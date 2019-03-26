@@ -19,13 +19,13 @@ nav-expanded nav-active
                     </a>
                 </li>
                 <li><span>Layouts</span></li>
-                <li><span>Manage Stock</span></li>
+                <li><span>Sale Product</span></li>
             </ol>
     
             {{-- <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a> --}}
         </div>
     
-        <h2>Manage Stock</h2>
+        <h2>Sale Product</h2>
     </header>
 
     <!-- start: page -->
@@ -49,13 +49,11 @@ nav-expanded nav-active
                         </ul>
                     </div>
                 @endif
-                <div onclick="btnToggleFunction()" class="panel-header btn btn-default btn-block" style="padding: 0px 6px;font-size: 12px;">
-                    <a><h4 class="center"><i class="fa fa-plus" aria-hidden="true" ></i> &nbsp Add New Product</h4></a>
-                </div>
+             
                 <div class="container">
-                    <div id="IdToggleBtn" style="display:none" class="panel-body col-md-12 ">
+                    <div class="panel-body col-md-12 ">
                         <br/>
-                        <form action="{{ route('add-product') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="{{ route('add-to-cart') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                             {{ csrf_field() }}
 
                             <div class="form-group">
@@ -65,8 +63,13 @@ nav-expanded nav-active
                                     </div>
 
                                     <div class="form-group col-md-9">
-                                        <input type="text" class="form-control" name="product_name" required>
-                                        <span class="text-danger">{{ $errors->has('product_name') ? $errors->first('product_name') : ' ' }}</span>
+                                        <select class="form-control" name="product_id" onchange="productPrice(this.value)">
+                                            <option value="">Select Product</option>
+                                            @foreach($obj_product as $product)
+                                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                            @endforeach
+                                        </select>
+         
                                     </div>
                                 </div>
                             </div>
@@ -77,8 +80,8 @@ nav-expanded nav-active
                                         <label class="control-label"> Product Price</label>
                                     </div>
 
-                                    <div class="form-group col-md-9">
-                                        <input type="text" class="form-control" name="product_price" required>
+                                    <div class="form-group col-md-9" id="product_price">
+                                        <input type="text" class="form-control"  name="product_price" required>
                                         <span class="text-danger">{{ $errors->has('product_price') ? $errors->first('product_price') : ' ' }}</span>
                                     </div>
                                 </div>
@@ -96,46 +99,12 @@ nav-expanded nav-active
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="control-label col-md-3"> Product Description</label>
-
-                                    <div class="form-group col-md-9">
-                                        <textarea class="form-control" name="product_description" ></textarea>
-                                        <span class="text-danger">{{ $errors->has('product_description') ? $errors->first('product_description') : ' ' }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="control-label col-md-3"> Product Image</label>
-
-                                    <div class="form-group col-md-9">
-                                        <input type="file" class="form-control" title="Image Should be 400*400 px" name="product_image">
-                                        <span class="text-danger">{{ $errors->has('product_image') ? $errors->first('product_image') : ' ' }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="control-label col-md-3">publication status</label>
-
-                                    <div class="form-group col-md-9">
-                                        <label> <input type="radio" name="publication_status"
-                                                       value="1" checked>Published</label>&nbsp;
-                                        <label> <input type="radio" name="publication_status"
-                                                       value="0">Unpublished</label>
-                                        <span class="text-danger">{{ $errors->has('publication_status') ? $errors->first('publication_status') : ' ' }}</span>
-                                    </div>
-                                </div>
-                            </div>
+          
                             <div class="form-group">
                                 <div class="row">
                                     <label class="control-label col-md-3"></label>
                                     <div class="form-group col-md-9">
-                                        <input type="submit" value="Save Product Info"
+                                        <input type="submit" value="Add"
                                                class="btn btn-success btn-block" name="btn">
                                     </div>
                                 </div>
@@ -147,7 +116,13 @@ nav-expanded nav-active
         </div>
     </div>
     </div>
-    <br/>
+
+
+
+
+
+
+ <br/>
     <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -163,45 +138,35 @@ nav-expanded nav-active
                             <th>Product Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
-                            <th>Product description</th>
+                            
                             <th>Product Image</th>
-                            <th>Publication Status</th>
+                            
                             <th>Action</th>
                         </tr>
-                          @php($i = $obj_product->perPage() * ($obj_product->currentPage() - 1))
-                       @foreach($obj_product as $product)
+                        @php($i = 1)
+                        @php($sum = 0)
+                        @foreach($cartProducts as $cartProduct)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $product-> product_name}}</td>
-                                <td>{{ $product-> product_price}}</td>
-                                <td>{{ $product-> product_quantity}}</td>
-                                <td>{{ $product-> product_description}}</td>
+                                <td>{{ $cartProduct-> name}}</td>
+                                <td>{{ $cartProduct-> price}}</td>
+                                <td>{{ $cartProduct-> qty}}</td>
+
                                 <td>
-                                    @if( $product-> product_image!=null)
-                                    <img src="{{ asset($product-> product_image) }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
+                                    @if( $cartProduct->options-> image!=null)
+                                    <img src="{{ asset($cartProduct->options-> image) }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
                                     @else 
                                     <img src="{{ asset('images/medicine.png') }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
                                     @endif
                                     </td>
-                                <td>{{ $product-> publication_status==1 ? 'Published':'Unpublished'}}</td>
 
                                 <td>
-                                    @if($product-> publication_status==1)
-                                        <a href="{{ route('unpublished-product',['id'=>$product->id]) }}" data-toggle="tooltip" data-placement="top"
-                                           class="btn btn-info btn-xs" title="Unpublished">
-                                            <span class="fa fa-arrow-up"></span>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('published-product',['id'=>$product->id]) }}" data-toggle="tooltip" data-placement="top"
-                                           class="btn btn-warning btn-xs"title="Published">
-                                            <span class="fa fa-arrow-down"></span>
-                                        </a>
-                                    @endif
-                                    <a href="{{ url('admin/product/edit/'.$product->id) }}" data-toggle="tooltip" data-placement="top"
+                     
+                                    {{-- <a href="{{ url('admin/product/edit/'.$cartProduct->id) }}" data-toggle="tooltip" data-placement="top"
                                        class="btn btn-success btn-xs" title="Edit">
                                         <span class="fa fa-edit"></span>
-                                    </a> 
-                                    <a href="{{ route('delete-product',['id'=>$product->id]) }}"data-toggle="tooltip" data-placement="top"
+                                    </a>  --}}
+                                    <a href="{{ route('delete-cart-item', ['rowId'=>$cartProduct->rowId]) }}"data-toggle="tooltip" data-placement="top"
                                        class="btn btn-danger btn-xs" title="Delete">
                                         <span class="fa fa-trash"></span>
                                     </a>
@@ -209,9 +174,7 @@ nav-expanded nav-active
                             </tr>
                         @endforeach 
                     </table>
-                     <div class="float-right">
-                        {{ $obj_product->links() }}
-                    </div> 
+                 
                 </div>
 
             </div>
@@ -219,6 +182,30 @@ nav-expanded nav-active
     </div>
     </div>
 
+
+
+
+
+<script>
+    function productPrice(id) {
+
+        
+       
+        var xmlHttp = new XMLHttpRequest();
+        var serverPage = 'http://127.0.0.1:8000/get-product-cost/'+id;
+ //console.log(serverPage);
+        xmlHttp.open('GET', serverPage);
+        xmlHttp.onreadystatechange = function () {
+             //console.log(xmlHttp.status == 200);
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                 //alert("Hello! I am an alert box!!");
+                // console.log(xmlHttp.status == 200);
+                document.getElementById('product_price').innerHTML = xmlHttp.responseText;
+            }
+        }
+        xmlHttp.send(null);
+    }
+</script>
    
 </section>
 @endsection

@@ -11,7 +11,7 @@
                             <span>Dashboard</span>
                         </a>                        
                     </li>
-                    <li class="nav-parent nav-expanded nav-active">
+                    <li class="nav-parent <?php echo $__env->yieldContent('activeStock'); ?>">
                         <a href="#">
                             <i class="fas fa-columns" aria-hidden="true"></i>
                             <span>Stock</span>
@@ -22,17 +22,31 @@
                                     Manage Stock
                                 </a>
                             </li>
+                          
+                            
+
+                        </ul>
+
+                    </li>
+                    <li class="nav-parent <?php echo $__env->yieldContent('activeSaleProduct'); ?>">
+                        <a href="#">
+                            <i class="fas fa-columns" aria-hidden="true"></i>
+                            <span>Sale Product</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo e(route('sale-product')); ?>">
+                                    Sale Product
+                                </a>
+                            </li>
                             <li>
                                 <a href="<?php echo e(route('/')); ?>">
                                     Default
                                 </a>
                             </li>
-                            
+  
 
                         </ul>
-
-
-
 
                     </li>
 
