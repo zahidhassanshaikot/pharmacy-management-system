@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 
 class ProductSaleController extends Controller
 {
-    public function saleProduct(){
-        $obj_product=Product::select('id','product_name')->distinct('product_name')->get();
+    public function saleProduct($id){
+        $obj_product=Product::select('id','product_name')
+        ->where('product_quantity','>','0')
+        ->distinct('product_name')->get();
         $cartProducts = Cart::content();
         // return $obj_product;
         return view('back-end.sale.sale-product',[
             'obj_product'=>$obj_product,
             'cartProducts'=>$cartProducts,
+            'customer_id'=>$id,
+            
         ]);
     }
 
@@ -23,4 +27,8 @@ class ProductSaleController extends Controller
         echo view('back-end.sale.ajax-product-price', ['obj_product' => $obj_product]);
     }
 
+    public function customerViewPage(){
+               $cartProducts = Cart::content();
+        return view('back-end.sale.customerView',['cartProducts'=>$cartProducts,]);
+    }
 }

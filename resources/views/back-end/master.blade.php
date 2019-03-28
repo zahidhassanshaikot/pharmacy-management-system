@@ -57,7 +57,7 @@
 		</section>
 
 		<!-- Vendor -->
-        <script src="{{asset('back-end')}}/vendor/jquery/jquery.js"></script>		
+        <script src="{{ asset('back-end') }}/vendor/jquery/jquery.js"></script>		
         <script src="{{asset('back-end')}}/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>		
         <script src="{{asset('back-end')}}/vendor/jquery-cookie/jquery-cookie.js"></script>		
         <script src="{{asset('back-end')}}/master/style-switcher/style.switcher.js"></script>		

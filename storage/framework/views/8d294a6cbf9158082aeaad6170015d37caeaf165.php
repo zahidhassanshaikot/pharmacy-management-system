@@ -35,13 +35,13 @@
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a href="<?php echo e(route('sale-product')); ?>">
+                                <a href="<?php echo e(route('add-customer')); ?>">
                                     Sale Product
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo e(route('/')); ?>">
-                                    Default
+                                <a href="<?php echo e(route('customer-view')); ?>">
+                                    Customer View Page
                                 </a>
                             </li>
   

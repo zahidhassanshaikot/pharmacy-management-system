@@ -28,11 +28,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/admin/product/update', 'ManageStockController@updateProduct')->name('update-product');
 
 
-        Route::get('/sale-product', 'ProductSaleController@saleProduct')->name('sale-product');
+        Route::get('/add/customer', 'CustomerController@customerAdd')->name('add-customer');
+        Route::post('/save/customer', 'CustomerController@saveCostomerInfo')->name('add-customer-info');
+        Route::get('/sale-product/{id}', 'ProductSaleController@saleProduct')->name('sale-product');
         Route::get('/get-product-cost/{id}', 'ProductSaleController@getProductCost')->name('get-product-cost');
+
+        Route::get('/customer/view', 'ProductSaleController@customerViewPage')->name('customer-view');
 
         Route::post('/add-to-cart', 'CartController@addToCart')->name('add-to-cart');
         Route::get('/delete-cart-item/{id}', 'CartController@removeFromCart')->name('delete-cart-item');
+        Route::get('/remove-all-cart', 'CartController@removeAllFromCart')->name('remove-all-cart');
+        Route::get('/checkout/{id}', 'CartController@checkout')->name('checkout');
     });
 
 });

@@ -4,7 +4,7 @@
 Manage Stock
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('activeStock'); ?>
+<?php $__env->startSection('activeSaleProduct'); ?>
 nav-expanded nav-active
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -37,6 +37,12 @@ nav-expanded nav-active
             <?php if(Session::get('message')): ?>
                 <div class="alert alert-success" id="message">
                     <h3 class=" text-center text-success"> <?php echo e(Session::get('message')); ?></h3>
+                </div>
+            <?php endif; ?>
+            
+            <?php if(Session::get('er_message')): ?>
+                <div class="alert alert-danger" >
+                    <h3 class=" text-center text-danger"><?php echo e(Session::get('er_message')); ?> is not Available</h3>
                 </div>
             <?php endif; ?>
             <div class=" card card-default">
@@ -139,28 +145,29 @@ nav-expanded nav-active
                             <th>Product Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
-                            
-                            <th>Product Image</th>
-                            
+                            <th> total </th>
                             <th>Action</th>
                         </tr>
-                        <?php ($i = 1); ?>
+                        <?php ($i = 0); ?>
                         <?php ($sum = 0); ?>
                         <?php $__currentLoopData = $cartProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e(++$i); ?></td>
-                                <td><?php echo e($cartProduct-> name); ?></td>
+                                <td>
+                                          <?php if( $cartProduct->options-> image!=null): ?>
+                                    <img src="<?php echo e(asset($cartProduct->options-> image)); ?>" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
+                                    <?php else: ?> 
+                                    <img src="<?php echo e(asset('images/medicine.png')); ?>" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
+                                    <?php endif; ?>
+                                    <?php echo e($cartProduct-> name); ?></td>
                                 <td><?php echo e($cartProduct-> price); ?></td>
                                 <td><?php echo e($cartProduct-> qty); ?></td>
-
                                 <td>
-                                    <?php if( $cartProduct->options-> image!=null): ?>
-                                    <img src="<?php echo e(asset($cartProduct->options-> image)); ?>" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    <?php else: ?> 
-                                    <img src="<?php echo e(asset('images/medicine.png')); ?>" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    <?php endif; ?>
-                                    </td>
+                                    <?php ($sum+=$cartProduct-> qty* $cartProduct-> price); ?> 
+                                     
+                                    <?php echo e($cartProduct-> qty* $cartProduct-> price); ?>
 
+                                </td>
                                 <td>
                      
                                     
@@ -172,7 +179,27 @@ nav-expanded nav-active
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
                     </table>
-                 
+                    <div>
+                         <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="h6 text-dark"> Total Cost: <?php echo e($sum); ?></p>
+                                    </div>
+
+                                </div>
+                        </div>
+                           
+                    </div>
+                 <div class="pull-right">
+                        <a href="<?php echo e(route('remove-all-cart')); ?>"data-toggle="tooltip" data-placement="top"
+                             class="btn btn-danger btn-xs" title="Delete">
+                                <span class="fa fa-trash"></span> Remove All
+                        </a>
+                        <a href="<?php echo e(route('checkout',['id'=>$customer_id])); ?>"data-toggle="tooltip" data-placement="top"
+                             class="btn btn-info btn-xs" title="Checkout">
+                         <span class="fa fa-trash"></span> Checkout
+                        </a>
+                 </div>
                 </div>
 
             </div>
@@ -185,10 +212,13 @@ nav-expanded nav-active
 
 
 <script>
-    function productPrice(id) {
 
-        
-       
+   
+
+    
+
+
+    function productPrice(id) {
         var xmlHttp = new XMLHttpRequest();
         var serverPage = 'http://127.0.0.1:8000/get-product-cost/'+id;
  //console.log(serverPage);

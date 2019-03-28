@@ -4,7 +4,7 @@
 Manage Stock
 @endsection
 
-@section('activeStock')
+@section('activeSaleProduct')
 nav-expanded nav-active
 @endsection
 @section('content')
@@ -37,6 +37,12 @@ nav-expanded nav-active
             @if(Session::get('message'))
                 <div class="alert alert-success" id="message">
                     <h3 class=" text-center text-success"> {{ Session::get('message') }}</h3>
+                </div>
+            @endif
+            
+            @if(Session::get('er_message'))
+                <div class="alert alert-danger" >
+                    <h3 class=" text-center text-danger">{{ Session::get('er_message') }} is not Available</h3>
                 </div>
             @endif
             <div class=" card card-default">
@@ -138,28 +144,28 @@ nav-expanded nav-active
                             <th>Product Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
-                            
-                            <th>Product Image</th>
-                            
+                            <th> total </th>
                             <th>Action</th>
                         </tr>
-                        @php($i = 1)
+                        @php($i = 0)
                         @php($sum = 0)
                         @foreach($cartProducts as $cartProduct)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $cartProduct-> name}}</td>
+                                <td>
+                                          @if( $cartProduct->options-> image!=null)
+                                    <img src="{{ asset($cartProduct->options-> image) }}" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
+                                    @else 
+                                    <img src="{{ asset('images/medicine.png') }}" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
+                                    @endif
+                                    {{ $cartProduct-> name}}</td>
                                 <td>{{ $cartProduct-> price}}</td>
                                 <td>{{ $cartProduct-> qty}}</td>
-
                                 <td>
-                                    @if( $cartProduct->options-> image!=null)
-                                    <img src="{{ asset($cartProduct->options-> image) }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    @else 
-                                    <img src="{{ asset('images/medicine.png') }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    @endif
-                                    </td>
-
+                                    @php($sum+=$cartProduct-> qty* $cartProduct-> price) 
+                                     
+                                    {{ $cartProduct-> qty* $cartProduct-> price }}
+                                </td>
                                 <td>
                      
                                     {{-- <a href="{{ url('admin/product/edit/'.$cartProduct->id) }}" data-toggle="tooltip" data-placement="top"
@@ -174,7 +180,27 @@ nav-expanded nav-active
                             </tr>
                         @endforeach 
                     </table>
-                 
+                    <div>
+                         <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="h6 text-dark"> Total Cost: {{ $sum }}</p>
+                                    </div>
+
+                                </div>
+                        </div>
+                           
+                    </div>
+                 <div class="pull-right">
+                        <a href="{{ route('remove-all-cart') }}"data-toggle="tooltip" data-placement="top"
+                             class="btn btn-danger btn-xs" title="Delete">
+                                <span class="fa fa-trash"></span> Remove All
+                        </a>
+                        <a href="{{ route('checkout',['id'=>$customer_id]) }}"data-toggle="tooltip" data-placement="top"
+                             class="btn btn-info btn-xs" title="Checkout">
+                         <span class="fa fa-trash"></span> Checkout
+                        </a>
+                 </div>
                 </div>
 
             </div>
@@ -187,10 +213,17 @@ nav-expanded nav-active
 
 
 <script>
-    function productPrice(id) {
 
-        
-       
+   {{-- setTimeout(function(){
+       location.reload();
+   },3000); --}}
+
+    {{-- setInterval(function(){
+   $('#my_div').load('/');
+}, 2000) /* time in milliseconds (ie 2 seconds)*/ --}}
+
+
+    function productPrice(id) {
         var xmlHttp = new XMLHttpRequest();
         var serverPage = 'http://127.0.0.1:8000/get-product-cost/'+id;
  //console.log(serverPage);

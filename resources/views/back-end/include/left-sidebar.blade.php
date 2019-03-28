@@ -51,13 +51,13 @@
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a href="{{ route('sale-product') }}">
+                                <a href="{{ route('add-customer') }}">
                                     Sale Product
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('/') }}">
-                                    Default
+                                <a href="{{ route('customer-view') }}">
+                                    Customer View Page
                                 </a>
                             </li>
   
