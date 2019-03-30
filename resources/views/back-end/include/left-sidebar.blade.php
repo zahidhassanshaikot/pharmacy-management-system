@@ -65,7 +65,12 @@
                         </ul>
 
                     </li>
-
+                    <li class="@yield('activeSaleProduct')">
+                        <a href="{{ route('customer-list') }}">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                            <span>Customer List</span>
+                        </a>                        
+                    </li>
            
                     
                 

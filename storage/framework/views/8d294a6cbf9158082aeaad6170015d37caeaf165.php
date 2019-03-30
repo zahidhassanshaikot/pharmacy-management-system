@@ -49,7 +49,12 @@
                         </ul>
 
                     </li>
-
+                    <li class="<?php echo $__env->yieldContent('activeSaleProduct'); ?>">
+                        <a href="<?php echo e(route('customer-list')); ?>">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                            <span>Customer List</span>
+                        </a>                        
+                    </li>
            
                     
                 

@@ -157,7 +157,8 @@ nav-expanded nav-active
                 </div>
                 <div class="card-body">
 
-                    <table class="table table-striped">
+                    <table class="table table-borderedless table-striped mb-0" id="datatable-default">
+                        <thead>
                         <tr class="text-primary">
                             <th>SL no</th>
                             <th>Product Name</th>
@@ -168,6 +169,8 @@ nav-expanded nav-active
                             <th>Publication Status</th>
                             <th>Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
                           @php($i = $obj_product->perPage() * ($obj_product->currentPage() - 1))
                        @foreach($obj_product as $product)
                             <tr>
@@ -208,6 +211,7 @@ nav-expanded nav-active
                                  </td>
                             </tr>
                         @endforeach 
+                        </tbody>
                     </table>
                      <div class="float-right">
                         {{ $obj_product->links() }}

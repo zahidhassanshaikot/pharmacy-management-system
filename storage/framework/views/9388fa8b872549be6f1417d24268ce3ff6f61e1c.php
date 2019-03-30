@@ -158,7 +158,8 @@ nav-expanded nav-active
                 </div>
                 <div class="card-body">
 
-                    <table class="table table-striped">
+                    <table class="table table-borderedless table-striped mb-0" id="datatable-default">
+                        <thead>
                         <tr class="text-primary">
                             <th>SL no</th>
                             <th>Product Name</th>
@@ -169,6 +170,8 @@ nav-expanded nav-active
                             <th>Publication Status</th>
                             <th>Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
                           <?php ($i = $obj_product->perPage() * ($obj_product->currentPage() - 1)); ?>
                        <?php $__currentLoopData = $obj_product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
@@ -209,6 +212,7 @@ nav-expanded nav-active
                                  </td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+                        </tbody>
                     </table>
                      <div class="float-right">
                         <?php echo e($obj_product->links()); ?>

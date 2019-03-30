@@ -50,13 +50,14 @@ active
 												</tr>
 											</thead>
 											<tbody>
+                                                @foreach($obj_customer as $customer)
 												<tr>
-													<td>1</td>
-													<td>Mark</td>
-													<td>Otto</td>
+													<td>{{ $customer->id }}</td>
+													<td>{{ $customer->customer_name }}</td>
+													<td>{{ $customer->customer_phone }}</td>
 													
 												</tr>
-											
+											@endforeach
 											</tbody>
 										</table>
 									</div>
@@ -77,12 +78,12 @@ active
                                     <div class="summary">
                                         <h4 class="title">Total Customer</h4>
                                         <div class="info">
-                                            <strong class="amount">1228</strong>
+                                            <strong class="amount">{{ $total_customer }}</strong>
                                             {{-- <span class="text-primary">(14 unread)</span> --}}
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(view all)</a>
+                                        <a class="text-muted text-uppercase" href="{{ route('customer-list') }}">(view all)</a>
                                     </div>
                                 </div>
                             </div>
@@ -102,11 +103,11 @@ active
                                     <div class="summary">
                                         <h4 class="title">Total Sale</h4>
                                         <div class="info">
-                                            <strong class="amount">$ 14,890.30</strong>
+                                            <strong class="amount">$ {{ $total_sale }}</strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(withdraw)</a>
+                                        <a class="text-muted text-uppercase" href="#">(report)</a>
                                     </div>
                                 </div>
                             </div>
@@ -128,11 +129,11 @@ active
                                     <div class="summary">
                                         <h4 class="title">Today's Sale</h4>
                                         <div class="info">
-                                            <strong class="amount">38</strong>
+                                            <strong class="amount">$ {{ $todays_sale }}</strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(statement)</a>
+                                        <a class="text-muted text-uppercase" href="#">(report)</a>
                                     </div>
                                 </div>
                             </div>
@@ -152,11 +153,11 @@ active
                                     <div class="summary">
                                         <h4 class="title">Today's Customer</h4>
                                         <div class="info">
-                                            <strong class="amount">20</strong>
+                                            <strong class="amount">{{ $todays_customer }}</strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(report)</a>
+                                        <a class="text-muted text-uppercase" href="{{ route('customer-list') }}">(report)</a>
                                     </div>
                                 </div>
                             </div>

@@ -31,4 +31,8 @@ class CustomerController extends Controller
         return redirect()->route('sale-product',['id'=> $obj_customer->id]);
         return $request;
     }
+    public function customerList(){
+        $obj_customer=Customer::OrderBy('created_at','DESC')->get();
+        return view('back-end.customer.customer-list')->with(compact('obj_customer'));
+    }
 }

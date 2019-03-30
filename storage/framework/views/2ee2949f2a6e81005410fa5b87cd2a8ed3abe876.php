@@ -50,13 +50,14 @@ active
 												</tr>
 											</thead>
 											<tbody>
+                                                <?php $__currentLoopData = $obj_customer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 												<tr>
-													<td>1</td>
-													<td>Mark</td>
-													<td>Otto</td>
+													<td><?php echo e($customer->id); ?></td>
+													<td><?php echo e($customer->customer_name); ?></td>
+													<td><?php echo e($customer->customer_phone); ?></td>
 													
 												</tr>
-											
+											<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 											</tbody>
 										</table>
 									</div>
@@ -77,12 +78,12 @@ active
                                     <div class="summary">
                                         <h4 class="title">Total Customer</h4>
                                         <div class="info">
-                                            <strong class="amount">1228</strong>
+                                            <strong class="amount"><?php echo e($total_customer); ?></strong>
                                             
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(view all)</a>
+                                        <a class="text-muted text-uppercase" href="<?php echo e(route('customer-list')); ?>">(view all)</a>
                                     </div>
                                 </div>
                             </div>
@@ -102,11 +103,11 @@ active
                                     <div class="summary">
                                         <h4 class="title">Total Sale</h4>
                                         <div class="info">
-                                            <strong class="amount">$ 14,890.30</strong>
+                                            <strong class="amount">$ <?php echo e($total_sale); ?></strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(withdraw)</a>
+                                        <a class="text-muted text-uppercase" href="#">(report)</a>
                                     </div>
                                 </div>
                             </div>
@@ -128,11 +129,11 @@ active
                                     <div class="summary">
                                         <h4 class="title">Today's Sale</h4>
                                         <div class="info">
-                                            <strong class="amount">38</strong>
+                                            <strong class="amount">$ <?php echo e($todays_sale); ?></strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(statement)</a>
+                                        <a class="text-muted text-uppercase" href="#">(report)</a>
                                     </div>
                                 </div>
                             </div>
@@ -152,11 +153,11 @@ active
                                     <div class="summary">
                                         <h4 class="title">Today's Customer</h4>
                                         <div class="info">
-                                            <strong class="amount">20</strong>
+                                            <strong class="amount"><?php echo e($todays_customer); ?></strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="#">(report)</a>
+                                        <a class="text-muted text-uppercase" href="<?php echo e(route('customer-list')); ?>">(report)</a>
                                     </div>
                                 </div>
                             </div>
