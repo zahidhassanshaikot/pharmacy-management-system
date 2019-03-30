@@ -13,7 +13,7 @@
                     </li>
                     <li class="nav-parent @yield('activeStock')">
                         <a href="#">
-                            <i class="fas fa-columns" aria-hidden="true"></i>
+                            <i class="fab fa-stack-exchange" aria-hidden="true"></i>
                             <span>Stock</span>
                         </a>
                         <ul class="nav nav-children">
@@ -46,7 +46,7 @@
                     </li>
                     <li class="nav-parent @yield('activeSaleProduct')">
                         <a href="#">
-                            <i class="fas fa-columns" aria-hidden="true"></i>
+                            <i class="fab fa-product-hunt" aria-hidden="true"></i>
                             <span>Sale Product</span>
                         </a>
                         <ul class="nav nav-children">

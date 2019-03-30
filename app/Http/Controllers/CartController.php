@@ -70,7 +70,7 @@ class CartController extends Controller
 
         }
         Cart::destroy();
-        return redirect()->back()->with('message','Product Successfully Checkout.');
+        return redirect()->route('add-customer')->with('message','Product Successfully Checkout.');
 
     }
 

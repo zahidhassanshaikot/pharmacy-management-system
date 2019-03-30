@@ -25,6 +25,7 @@ class CustomerController extends Controller
         $obj_customer->customer_email = $request->customer_email;
         $obj_customer->gender = $request->gender;
         $obj_customer->date_of_birth = $request->date_of_birth;
+        $obj_customer->address = $request->address;
         $obj_customer->save();
         // $obj_customer->id;
         return redirect()->route('sale-product',['id'=> $obj_customer->id]);

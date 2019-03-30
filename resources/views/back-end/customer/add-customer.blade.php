@@ -121,6 +121,18 @@ nav-expanded nav-active
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Address</label>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                        <input type="text" class="form-control" name="address">
+                                        <span class="text-danger">{{ $errors->has('address') ? $errors->first('address') : ' ' }}</span>
+                                    </div>
+                                </div>
+                            </div>
           
                             <div class="form-group">
                                 <div class="row">

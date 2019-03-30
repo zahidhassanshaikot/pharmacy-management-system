@@ -1,6 +1,8 @@
 <header class="header">
     <div class="logo-container">
-        <a href="http://preview.oklerthemes.com/porto-admin/2.1.1" class="logo">						<img src="{{asset('back-end')}}/img/logo.png" width="75" height="35" alt="Porto Admin" />					</a>					<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">						<i class="fas fa-bars" aria-label="Toggle sidebar"></i>					</div>
+        <a href="{{ route('/') }}" class="logo">
+        <img src="{{ asset('images/medicine.png') }}" width="35" height="35" alt="logo" /></a>					
+        <div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">						<i class="fas fa-bars" aria-label="Toggle sidebar"></i>					</div>
     </div>
 
     <!-- start: search & user box -->
@@ -197,14 +199,22 @@
                 <ul class="list-unstyled mb-2">
                     <li class="divider"></li>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a role="menuitem" tabindex="-1" href="#"><i class="fas fa-user"></i> My Profile</a>
                     </li>
                     <li>
                         <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fas fa-lock"></i> Lock Screen</a>
                     </li>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="pages-signin.html"><i class="fas fa-power-off"></i> Logout</a>
+                        <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i class="fas fa-power-off"></i> Logout</a>
                     </li>
+
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+
+
                 </ul>
             </div>
         </div>
