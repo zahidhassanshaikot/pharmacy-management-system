@@ -10,6 +10,7 @@ class ProductSaleController extends Controller
     public function saleProduct($id){
         $obj_product=Product::select('id','product_name')
         ->where('product_quantity','>','0')
+        ->where('publication_status','1')
         ->distinct('product_name')->get();
         $cartProducts = Cart::content();
         // return $obj_product;

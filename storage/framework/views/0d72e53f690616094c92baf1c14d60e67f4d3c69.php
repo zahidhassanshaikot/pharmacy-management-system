@@ -3,8 +3,8 @@
 <?php $__env->startSection('title'); ?>
 Manage Stock
 <?php $__env->stopSection(); ?>
-<?php $__env->startSection('appUser'); ?>
-active
+<?php $__env->startSection('activeStock'); ?>
+nav-expanded nav-active
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
