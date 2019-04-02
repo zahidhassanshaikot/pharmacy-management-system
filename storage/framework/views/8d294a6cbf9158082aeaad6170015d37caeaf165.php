@@ -55,8 +55,15 @@
                             <span>Customer List</span>
                         </a>                        
                     </li>
+                    <?php if(Auth::user()->hasRole(['Super Admin', 'Admin'])): ?>
+                    <li class="<?php echo $__env->yieldContent('activeUser'); ?>">
+                        <a href="<?php echo e(route('view-user-list')); ?>">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            <span>App User</span>
+                        </a>                        
+                    </li>
            
-                    
+                    <?php endif; ?>
                 
                 </ul>
             </nav>

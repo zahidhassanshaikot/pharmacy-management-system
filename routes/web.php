@@ -11,10 +11,28 @@
 |
 */
 
+     Route::post('/password-request', 'UserController@resetPassword')->name('password-request');
+
+
+
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'role:Super Admin|Admin|Employee'], function () {
+    Route::group(['middleware' => 'role:Super Admin|Admin|Manager'], function () {
 
         Route::get('/', 'DeshboardController@index')->name('/');
+
+        //User
+        Route::get('admin/user-list', 'UserController@userList')->name('view-user-list');
+        Route::get('admin/all-user/list/{role}', 'UserController@viewUserListByRole')->name('all-user-list');
+        Route::post('admin/registration/new-user', 'UserController@addNewUser')->name('register-new-user');
+        Route::post('/update-admin/profile', 'UserController@updateAdminProfile')->name('update-admin-profile');
+        Route::get('admin/my-profile', 'UserController@myProfile')->name('my-profile');
+        Route::get('admin/my-profile/edit', 'UserController@myProfileEdit')->name('edit-admin-profile');
+        Route::get('admin/password-change', 'UserController@changePassword')->name('password-change');
+        Route::post('admin/update-password', 'UserController@updatePassword')->name('update-password');
+
+        Route::post('/super-admin/change/role', 'UserController@changeUserRole')->name('change-user-role-by-SAdmin');
+        Route::post('/super-admin/change/Password', 'UserController@changeUserPasswordBySadmin')->name('change-user-password-by-SAdmin');
+        Route::get('/super-admin/delete/user/{id}', 'UserController@deleteUserBySuperAdmin')->name('delete-user-by-SAdmin');
 
         //stock
         Route::get('/home', 'HomeController@index')->name('home');

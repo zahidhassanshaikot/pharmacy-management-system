@@ -71,8 +71,15 @@
                             <span>Customer List</span>
                         </a>                        
                     </li>
+                    @if(Auth::user()->hasRole(['Super Admin', 'Admin']))
+                    <li class="@yield('activeUser')">
+                        <a href="{{ route('view-user-list') }}">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            <span>App User</span>
+                        </a>                        
+                    </li>
            
-                    
+                    @endif
                 
                 </ul>
             </nav>

@@ -185,7 +185,13 @@
         <div id="userbox" class="userbox">
             <a href="#" data-toggle="dropdown">
                 <figure class="profile-picture">
-                    <img src="{{asset('back-end')}}/img/%21logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="img/%21logged-user.jpg" />
+                         @if(!empty(Auth::user()->image)) 
+                            <img src="{{ asset(Auth::user()->image) }}" alt="Profile Pic" class="rounded-circle" data-lock-picture="{{ asset(Auth::user()->image) }}" />
+                            @else
+                            
+                            <img src="{{ asset('images/d_profilePic.png') }}" alt="Profile Pic" class="rounded-circle" data-lock-picture="{{ asset('images/d_profilePic.png') }}" />
+                            @endif
+                    {{--  <img src="{{asset('back-end')}}/img/%21logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="img/%21logged-user.jpg" />  --}}
                 </figure>
                 <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                 <span class="name">{{Auth::user()->name}}</span>
@@ -199,11 +205,11 @@
                 <ul class="list-unstyled mb-2">
                     <li class="divider"></li>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a role="menuitem" tabindex="-1" href="{{ route('my-profile') }}"><i class="fas fa-user"></i> My Profile</a>
                     </li>
-                    <li>
+                    {{--  <li>
                         <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fas fa-lock"></i> Lock Screen</a>
-                    </li>
+                    </li>  --}}
                     <li>
                         <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"><i class="fas fa-power-off"></i> Logout</a>

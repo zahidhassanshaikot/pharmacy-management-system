@@ -128,7 +128,13 @@
         <div id="userbox" class="userbox">
             <a href="#" data-toggle="dropdown">
                 <figure class="profile-picture">
-                    <img src="<?php echo e(asset('back-end')); ?>/img/%21logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="img/%21logged-user.jpg" />
+                         <?php if(!empty(Auth::user()->image)): ?> 
+                            <img src="<?php echo e(asset(Auth::user()->image)); ?>" alt="Profile Pic" class="rounded-circle" data-lock-picture="<?php echo e(asset(Auth::user()->image)); ?>" />
+                            <?php else: ?>
+                            
+                            <img src="<?php echo e(asset('images/d_profilePic.png')); ?>" alt="Profile Pic" class="rounded-circle" data-lock-picture="<?php echo e(asset('images/d_profilePic.png')); ?>" />
+                            <?php endif; ?>
+                    
                 </figure>
                 <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                 <span class="name"><?php echo e(Auth::user()->name); ?></span>
@@ -142,11 +148,9 @@
                 <ul class="list-unstyled mb-2">
                     <li class="divider"></li>
                     <li>
-                        <a role="menuitem" tabindex="-1" href="#"><i class="fas fa-user"></i> My Profile</a>
+                        <a role="menuitem" tabindex="-1" href="<?php echo e(route('my-profile')); ?>"><i class="fas fa-user"></i> My Profile</a>
                     </li>
-                    <li>
-                        <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fas fa-lock"></i> Lock Screen</a>
-                    </li>
+                    
                     <li>
                         <a role="menuitem" tabindex="-1" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"><i class="fas fa-power-off"></i> Logout</a>
