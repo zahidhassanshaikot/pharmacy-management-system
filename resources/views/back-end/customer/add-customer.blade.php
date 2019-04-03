@@ -50,9 +50,12 @@ nav-expanded nav-active
                         </ul>
                     </div>
                 @endif
-             
-                <div class="container">
-                    <div class="panel-body col-md-12 ">
+               <div onclick="btnToggleFunction()" class="panel-header btn btn-default btn-block" style="padding: 0px 6px;font-size: 12px;">
+                    <a><h4 class="center"><i class="fa fa-plus" aria-hidden="true" ></i> &nbsp New Customer</h4></a>
+                </div>
+                <div class="container-fluid">
+              
+                    <div id="IdToggleBtn" style="display:none" class="panel-body col-md-12 ">
                         <br/>
                         <form action="{{ route('add-customer-info') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                             {{ csrf_field() }}
@@ -151,6 +154,59 @@ nav-expanded nav-active
     </div>
     </div>
 
+ <br/>
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" card panel-default">
+                <div class="card-header">
+                    <h3 class="center">Customer</h3>
+                </div>
+                <div class="card-body">
+
+                    <table class="table table-borderedless table-striped mb-0" id="datatable-default">
+                        <thead>
+                        <tr class="text-primary">
+                            <th>#</th>
+                            <th>Customer ID</th>
+                            <th>Customer Name</th>
+                            <th>Phone No</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Address</th> 
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                       
+                       @foreach($obj_customers as $customer)
+                            <tr>
+                                <td></td>
+                                <td>{{ $customer->id }}</td>
+                                <td>{{ $customer->customer_name }}</td>
+                                <td>{{ $customer->customer_phone }}</td>
+                                <td>{{ $customer->customer_email }}</td>
+                                <td>{{ $customer->gender }}</td>
+                                <td>{{ $customer->address }}</td>
+                           
+                                <td>
+                                
+                                    <a href="{{ route('sale-product',['id'=>$customer->id]) }}"data-toggle="tooltip" data-placement="top"
+                                       class="btn btn-outline-info btn-xs" title="Sale">
+                                       <span class="fas fa-cart-arrow-down"> </span>
+                                    </a>
+                                 </td>
+                            </tr>
+                        @endforeach 
+                        </tbody>
+                    </table>
+                 
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
 
 
 @endsection

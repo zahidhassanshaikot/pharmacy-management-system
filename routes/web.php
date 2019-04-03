@@ -63,6 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/save/customer', 'CustomerController@saveCostomerInfo')->name('add-customer-info');
         Route::get('/customer/list', 'CustomerController@customerList')->name('customer-list');
 
+        //report
+        Route::get('/most-sale-product','ReportController@mostSaleProduct')->name('most-sale-product');
+
 
     });
 

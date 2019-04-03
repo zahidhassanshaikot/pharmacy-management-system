@@ -32,6 +32,8 @@
 							<tr class="table100-head">
                             <th>SL no</th>
                             <th>Product Name</th>
+                            <th>Company Name</th>
+                            <th>Group Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
                             <th> total </th>
@@ -51,6 +53,8 @@
                                     <img src="<?php echo e(asset('images/medicine.png')); ?>" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
                                     <?php endif; ?>
                                     <?php echo e($cartProduct-> name); ?></td>
+                                <td><?php echo e($cartProduct->options-> company_name); ?></td>
+                                <td><?php echo e($cartProduct->options-> group_name); ?></td>
                                 <td><?php echo e($cartProduct-> price); ?></td>
                                 <td><?php echo e($cartProduct-> qty); ?></td>
                                 <td>

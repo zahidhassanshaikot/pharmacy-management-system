@@ -78,6 +78,24 @@
                             <span>App User</span>
                         </a>                        
                     </li>
+
+                    <li class="nav-parent @yield('activeReport')">
+                        <a href="#">
+                            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                            <span>Report</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="{{ route('most-sale-product') }}">
+                                    Most Sale Product
+                                </a>
+                            </li>
+                            
+  
+
+                        </ul>
+
+                    </li>
            
                     @endif
                 

@@ -70,6 +70,30 @@ nav-expanded nav-active
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Company Name</label>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                        <input type="text" class="form-control" name="company" required>
+                                        <span class="text-danger">{{ $errors->has('company') ? $errors->first('company') : ' ' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Group Name</label>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                        <input type="text" class="form-control" name="product_group" required>
+                                        <span class="text-danger">{{ $errors->has('product_group') ? $errors->first('product_group') : ' ' }}</span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="row">
@@ -162,6 +186,8 @@ nav-expanded nav-active
                         <tr class="text-primary">
                             <th>SL no</th>
                             <th>Product Name</th>
+                            <th>Company Name</th>
+                            <th>Group Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
                             <th>Product description</th>
@@ -171,11 +197,13 @@ nav-expanded nav-active
                         </tr>
                         </thead>
                         <tbody>
-                          @php($i = $obj_product->perPage() * ($obj_product->currentPage() - 1))
+                          @php($i = 0)
                        @foreach($obj_product as $product)
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $product-> product_name}}</td>
+                                <td>{{ $product-> company_name}}</td>
+                                <td>{{ $product-> group_name}}</td>
                                 <td>{{ $product-> product_price}}</td>
                                 <td>{{ $product-> product_quantity}}</td>
                                 <td>{{ $product-> product_description}}</td>
@@ -213,9 +241,7 @@ nav-expanded nav-active
                         @endforeach 
                         </tbody>
                     </table>
-                     <div class="float-right">
-                        {{ $obj_product->links() }}
-                    </div> 
+                 
                 </div>
 
             </div>

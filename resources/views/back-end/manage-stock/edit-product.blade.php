@@ -72,6 +72,34 @@ nav-expanded nav-active
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-3">
+                                        <label class="control-label">Company Name</label>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                        <input type="text" class="form-control" value="{{ $obj_product->company }}" name="company" required>
+                                        
+                                        <span class="text-danger">{{ $errors->has('company') ? $errors->first('company') : ' ' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Group Name</label>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                        <input type="text" class="form-control" value="{{ $obj_product->product_group }}" name="product_group" required>
+                                       
+                                        <span class="text-danger">{{ $errors->has('product_group') ? $errors->first('product_group') : ' ' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
                                         <label class="control-label"> Product Price</label>
                                     </div>
 

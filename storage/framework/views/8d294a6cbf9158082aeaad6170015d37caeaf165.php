@@ -62,6 +62,24 @@
                             <span>App User</span>
                         </a>                        
                     </li>
+
+                    <li class="nav-parent <?php echo $__env->yieldContent('activeReport'); ?>">
+                        <a href="#">
+                            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                            <span>Report</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="<?php echo e(route('most-sale-product')); ?>">
+                                    Most Sale Product
+                                </a>
+                            </li>
+                            
+  
+
+                        </ul>
+
+                    </li>
            
                     <?php endif; ?>
                 

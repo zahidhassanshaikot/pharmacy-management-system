@@ -16,7 +16,7 @@ use Image;
 class ManageStockController extends Controller
 {
     public function manageStock(){
-        $obj_product=Product::paginate(7);
+        $obj_product=Product::all();
 
         return view('back-end.manage-stock.manage-stock',['obj_product'=>$obj_product]);
 }
@@ -24,12 +24,16 @@ class ManageStockController extends Controller
 
           $this->validate($request, [
             'product_name' => 'required|regex:/^[\pL\s\-]+$/u|max:20|min:2',
-            'publication_status' => 'required'
+            'publication_status' => 'required',
+            'product_price' => 'required',
+            'product_quantity' => 'required'
         ]);
         $obj_product = new Product();
 
 
         $obj_product->product_name = $request->product_name;
+        $obj_product->company_name = $request->company;
+        $obj_product->group_name = $request->product_group;
         $obj_product->product_price = $request->product_price;
         $obj_product->product_quantity = $request->product_quantity;
         $obj_product->product_description = $request->product_description;
@@ -90,12 +94,16 @@ class ManageStockController extends Controller
         
           $this->validate($request, [
             'product_name' => 'required|regex:/^[\pL\s\-]+$/u|max:20|min:2',
-            'publication_status' => 'required'
+            'publication_status' => 'required',
+            'product_price' => 'required',
+            'product_quantity' => 'required'
         ]);
         $obj_product =Product::find($request->product_id);
 
 
         $obj_product->product_name = $request->product_name;
+        $obj_product->company_name = $request->company;
+        $obj_product->group_name = $request->product_group;
         $obj_product->product_price = $request->product_price;
         $obj_product->product_quantity = $request->product_quantity;
         $obj_product->product_description = $request->product_description;

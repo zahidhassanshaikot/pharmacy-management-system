@@ -21,9 +21,13 @@ class CartController extends Controller
             'price' =>$request->product_price,
             'qty'   => $request->product_quantity,
             'options' => [
-                'image' => $product->product_image
+                'image' => $product->product_image,
+                'company_name' => $product->company_name,
+                'group_name' => $product->group_name
             ]
         ]);
+        // $cartProducts=Cart::content();
+        // return $cartProducts;
 
         return redirect()->back()->with('message','product Added successfully');
 
@@ -39,6 +43,7 @@ class CartController extends Controller
     public function checkout($customer_id){
         
         $cartProducts=Cart::content();
+        // return $cartProducts;
        
         foreach($cartProducts as $cartProduct){
             $product = Product::find($cartProduct->id);

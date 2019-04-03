@@ -9,7 +9,8 @@ use App\Product;
 class CustomerController extends Controller
 {
     public function customerAdd(){
-        return view('back-end.customer.add-customer');
+        $obj_customers=Customer::orderBy('created_at','DESC')->get();
+        return view('back-end.customer.add-customer',['obj_customers'=>$obj_customers]);
     }
     public function saveCostomerInfo(Request $request){
         

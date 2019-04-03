@@ -32,6 +32,8 @@
 							<tr class="table100-head">
                             <th>SL no</th>
                             <th>Product Name</th>
+                            <th>Company Name</th>
+                            <th>Group Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
                             <th> total </th>
@@ -51,6 +53,8 @@
                                     <img src="{{ asset('images/medicine.png') }}" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
                                     @endif
                                     {{ $cartProduct-> name}}</td>
+                                <td>{{ $cartProduct->options-> company_name}}</td>
+                                <td>{{ $cartProduct->options-> group_name}}</td>
                                 <td>{{ $cartProduct-> price}}</td>
                                 <td>{{ $cartProduct-> qty}}</td>
                                 <td>
