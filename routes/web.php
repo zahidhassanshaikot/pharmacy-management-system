@@ -15,7 +15,7 @@
 
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'verified:ture']], function () {
     Route::group(['middleware' => 'role:Super Admin|Admin|Manager'], function () {
 
         Route::get('/', 'DeshboardController@index')->name('/');
@@ -70,5 +70,5 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 });
-
-Auth::routes();
+Auth::routes(['verify' => true]);
+// Auth::routes();

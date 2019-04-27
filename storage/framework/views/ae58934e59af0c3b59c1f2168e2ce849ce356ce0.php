@@ -1,1 +1,0 @@
- <input type="text" class="form-control" value="<?php echo e($obj_product->product_price); ?>" id="product_price" name="product_price" required>
