@@ -221,6 +221,43 @@ active
                 </div>
             </section>
         </div>
+
+<div class="col-lg-6 mb-3">
+            <section class="card">
+                <div class="card-header">
+                    <h3 class="center">Salls Man</h3>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <table class="table table-striped">
+                                <tr class="">
+                                    <th>SL no</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    {{--<th>Action</th>--}}
+                                </tr>
+                                @php($i=1)
+                                @foreach($userSellsMan as $sellsMan)
+                                    <tr class="">
+                                        <th>{{$i++}}</th>
+                                        <th>{{$sellsMan->name}}</th>
+                                        <th>{{$sellsMan->email}}</th>
+                                        {{--<th></th>--}}
+                                    </tr>
+
+                                @endforeach
+                            </table>
+                            <a href="{{ route('all-user-list',['role'=>'Salls Man']) }}" class="text-uppercase float-right">
+                                (View all)</a>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
     </div>
 </div>
 

@@ -30,6 +30,9 @@ class LoginController extends Controller
         } else if ($user->hasRole('Manager')){
 
             return redirect('/');
+        } else if ($user->hasRole('Sells Man')){
+
+            return redirect('/');
 
         }else{
             $request->session()->invalidate();

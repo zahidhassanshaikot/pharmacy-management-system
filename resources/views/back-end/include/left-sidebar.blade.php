@@ -11,11 +11,13 @@
                             <span>Dashboard</span>
                         </a>                        
                     </li>
+                    @if(Auth::user()->hasRole(['Super Admin', 'Admin','Manager']))
                     <li class="nav-parent @yield('activeStock')">
                         <a href="#">
                             <i class="fab fa-stack-exchange" aria-hidden="true"></i>
                             <span>Stock</span>
                         </a>
+                        
                         <ul class="nav nav-children">
                             <li>
                                 <a href="{{ route('manage-stock') }}">
@@ -42,12 +44,14 @@
                             </li> --}}
 
                         </ul>
+                        
 
                     </li>
+                    @endif
                     <li class="nav-parent @yield('activeSaleProduct')">
                         <a href="#">
                             <i class="fab fa-product-hunt" aria-hidden="true"></i>
-                            <span>Sale Product</span>
+                            <span>Sell Product</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
@@ -75,7 +79,7 @@
                     <li class="@yield('activeUser')">
                         <a href="{{ route('view-user-list') }}">
                             <i class="fas fa-user" aria-hidden="true"></i>
-                            <span>App User</span>
+                            <span>User Management</span>
                         </a>                        
                     </li>
 
@@ -87,7 +91,7 @@
                         <ul class="nav nav-children">
                             <li>
                                 <a href="{{ route('most-sale-product') }}">
-                                    Most Sale Product
+                                    Most Sell Product
                                 </a>
                             </li>
                             

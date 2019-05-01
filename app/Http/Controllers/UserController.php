@@ -60,12 +60,17 @@ class UserController extends Controller
             $query->where('name', '=', 'Manager');
         })->orderBy('created_at', 'desc')->take(3)->get();
 
+        $userSellsMan = User::whereHas('roles', function ($query) {
+            $query->where('name', '=', 'Sells Man');
+        })->orderBy('created_at', 'desc')->take(3)->get();
+
 
         $roles = Role::all();
 
         return view('back-end.users.user-list', [
             'userAdmins' => $userAdmins,
             'userEditors' => $userManagers,
+            'userSellsMan' => $userSellsMan,
     
             'roles' => $roles,
         ]);
@@ -99,7 +104,7 @@ class UserController extends Controller
             //     'role' => 'Admin',
             //     'name' => $users_name), function ($message) use ($users_name, $users_email) {
             //     $message->from('mail@gmail.com', 'nnnnnnnnaaaame');
-            //     $message->to($users_email, $users_name)->subject('Welcome To Brotherhood Infotech');
+            //     $message->to($users_email, $users_name)->subject('Welcome To PMS Infotech');
             // });
 
             $user->save();
@@ -110,15 +115,19 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            // Mail::send('admin.users.welcomeMsg', array(
-            //     'role' => 'Manager',
-            //     'name' => $users_name), function ($message) use ($users_name, $users_email) {
-            //     $message->from('mail@gmail.com', 'nnnnnnnnaaaame');
-            //     $message->to($users_email, $users_name)->subject('Welcome To Brotherhood Infotech');
-            // });
+      
 
             $user->save();
             $user->attachRole(Role::where('name', 'Manager')->first());
+
+    
+        } elseif ($request->user_role == 'Sells Man') {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $user->attachRole(Role::where('name', 'Sells Man')->first());
 
         } 
 
@@ -127,6 +136,7 @@ class UserController extends Controller
 
     public function viewUserListByRole($role)
     {
+        // return $role;
         if ($role == 'Admin') {
             $userList = User::whereHas('roles', function ($query) {
                 $query->where('name', '=', 'Admin');
@@ -137,7 +147,13 @@ class UserController extends Controller
             $userList = User::whereHas('roles', function ($query) {
                 $query->where('name', '=', 'Manager');
             })->orderBy('created_at', 'desc')->paginate(10);
+        } elseif ($role == 'Salls Man') {
+            
+            $userList = User::whereHas('roles', function ($query) {
+                $query->where('name', '=', 'Sells Man');
+            })->orderBy('created_at', 'desc')->paginate(10);
         } 
+        // return $userList;
         $roles = Role::all();
         return view('back-end.users.view-all-user-by-role', [
             'userList' => $userList,
