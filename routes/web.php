@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth', 'verified:ture']], function () {
 
         //report
         Route::get('/most-sale-product','ReportController@mostSaleProduct')->name('most-sale-product');
+        Route::get('/full-course-not-taken','ReportController@fullCourseNotTaken')->name('did-not-take-full-course');
+        Route::get('/details-full-course/{id}','ReportController@detailsFullCourseNotTaken')->name('details-full-course');
 
 
     });

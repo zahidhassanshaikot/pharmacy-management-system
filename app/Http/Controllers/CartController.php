@@ -24,7 +24,8 @@ class CartController extends Controller
             'options' => [
                 'image' => $product->product_image,
                 'company_name' => $product->company_name,
-                'group_name' => $product->group_name
+                'group_name' => $product->group_name,
+                'product_need' => $request->product_need
             ]
         ]);
         // $cartProducts=Cart::content();
@@ -66,6 +67,9 @@ class CartController extends Controller
             $obj_sale_product->product_id=(int)$cartProduct->id;
             $obj_sale_product->product_price=$cartProduct->price;
             $obj_sale_product->product_quantity=$cartProduct->qty;
+
+            $obj_sale_product->product_need=$cartProduct->options->product_need;
+
             $obj_sale_product->product_discount=0;
             //  return gettype($obj_sale_product->product_id);
             $obj_sale_product->save();

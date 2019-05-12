@@ -95,6 +95,12 @@
                                 </a>
                             </li>
                             
+                            <li>
+                                <a href="{{ route('did-not-take-full-course') }}">
+                                    Full Course Not Taken
+                                </a>
+                            </li>
+                            
   
 
                         </ul>

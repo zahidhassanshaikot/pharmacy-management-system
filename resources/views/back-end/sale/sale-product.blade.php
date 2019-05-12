@@ -106,6 +106,20 @@ nav-expanded nav-active
                                 </div>
                             </div>
           
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Total Product Need</label>
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                        <input type="text" class="form-control" name="product_need" required>
+                                        <span class="text-danger">{{ $errors->has('product_need') ? $errors->first('product_need') : ' ' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="row">
                                     <label class="control-label col-md-3"></label>
@@ -144,6 +158,7 @@ nav-expanded nav-active
                             <th>Product Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
+                            <th>Product need</th>
                             <th> total </th>
                             <th>Action</th>
                         </tr>
@@ -161,6 +176,7 @@ nav-expanded nav-active
                                     {{ $cartProduct-> name}}</td>
                                 <td>{{ $cartProduct-> price}}</td>
                                 <td>{{ $cartProduct-> qty}}</td>
+                                <td>{{ $cartProduct->options-> product_need}}</td>
                                 <td>
                                     @php($sum+=$cartProduct-> qty* $cartProduct-> price) 
                                      

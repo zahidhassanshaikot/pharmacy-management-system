@@ -43,11 +43,11 @@ nav-expanded nav-active
                         <thead>
                         <tr class="text-primary">
                             <th>SL no</th>
-                             {{--  <th>Product Image</th>   --}}
                             <th>Product Name</th>
                             <th>Company Name</th>
                             <th>Group Name</th> 
-                            <th>Total Sale</th> 
+                            <th>Product taken</th> 
+                            <th>Product needed</th> 
                            
                         </tr>
                         </thead>
@@ -56,17 +56,11 @@ nav-expanded nav-active
                        @foreach($obj_product as $product)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                       {{--  <td>
-                                    @if( $product-> product_image!=null)
-                                    <img src="{{ asset($product-> product_image) }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    @else 
-                                    <img src="{{ asset('images/medicine.png') }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    @endif
-                                </td>  --}}
                                 <td>{{ $product-> product_name}}</td>
                                 <td>{{ $product-> company_name}}</td>
                                 <td>{{ $product-> group_name}}</td>
-                                <td>{{ $product-> total_sale}}</td>                      
+                                <td>{{ $product-> product_quantity}}</td>                      
+                                <td>{{ $product-> product_need}}</td>                      
   
                             </tr>
                         @endforeach 

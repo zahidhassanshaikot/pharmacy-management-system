@@ -35,7 +35,7 @@ nav-expanded nav-active
         <div class="col-md-12">
             <div class=" card panel-default">
                 <div class="card-header">
-                    <h3 class="center">Products</h3>
+                    <h3 class="center">Customers</h3>
                 </div>
                 <div class="card-body">
 
@@ -43,30 +43,24 @@ nav-expanded nav-active
                         <thead>
                         <tr class="text-primary">
                             <th>SL no</th>
-                             {{--  <th>Product Image</th>   --}}
-                            <th>Product Name</th>
-                            <th>Company Name</th>
-                            <th>Group Name</th> 
-                            <th>Total Sale</th> 
+                             
+                            <th>Customer Name</th>
+                            <th>Customer Phone No</th>
+                            <th>Customer Email</th> 
+                           
                            
                         </tr>
                         </thead>
                         <tbody>
                           @php($i = 0)
-                       @foreach($obj_product as $product)
+                       @foreach($customers as $customer)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                       {{--  <td>
-                                    @if( $product-> product_image!=null)
-                                    <img src="{{ asset($product-> product_image) }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    @else 
-                                    <img src="{{ asset('images/medicine.png') }}" class="rounded-circle" alt="image" style="height:50px;wide:50px">
-                                    @endif
-                                </td>  --}}
-                                <td>{{ $product-> product_name}}</td>
-                                <td>{{ $product-> company_name}}</td>
-                                <td>{{ $product-> group_name}}</td>
-                                <td>{{ $product-> total_sale}}</td>                      
+                                      
+                                <td> <a href="{{ route('details-full-course',['id'=>$customer->id]) }}" class="btn-link "> {{ $customer-> customer_name}} </a></td>
+                                <td>{{ $customer-> customer_phone}}</td>
+                                <td>{{ $customer-> customer_email}}</td>
+                                                    
   
                             </tr>
                         @endforeach 

@@ -36,6 +36,7 @@
                             <th>Group Name</th>
                             <th>Product Price</th>
                             <th>Product Quantity</th>
+                            <th>Product Need</th>
                             <th> total </th>
                             {{--  <th>Action</th>  --}}
 							</tr>
@@ -57,6 +58,7 @@
                                 <td>{{ $cartProduct->options-> group_name}}</td>
                                 <td>{{ $cartProduct-> price}}</td>
                                 <td>{{ $cartProduct-> qty}}</td>
+                                <td>{{ $cartProduct->options-> product_need}}</td>
                                 <td>
                                     @php($sum+=$cartProduct-> qty* $cartProduct-> price) 
                                      
