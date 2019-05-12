@@ -1,20 +1,20 @@
    
-@extends('back-end.master')
-@section('title')
-Manage Stock
-@endsection
 
-@section('activeSaleProduct')
+<?php $__env->startSection('title'); ?>
+Manage Stock
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('activeSaleProduct'); ?>
 nav-expanded nav-active
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <section role="main" class="content-body">
     <header class="page-header page-header-left-breadcrumb">
         <div class="right-wrapper">
             <ol class="breadcrumbs">
                 <li>
-                    <a href="{{ route('/') }}">
+                    <a href="<?php echo e(route('/')); ?>">
                         <i class="fas fa-home"></i>
                     </a>
                 </li>
@@ -22,7 +22,7 @@ nav-expanded nav-active
                 <li><span>Sale Product</span></li>
             </ol>
     
-            {{-- <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a> --}}
+            
         </div>
     
         <h2>Sale Product</h2>
@@ -34,33 +34,34 @@ nav-expanded nav-active
     <div class="row">
         <div class="col-md-12">
 
-            @if(Session::get('message'))
+            <?php if(Session::get('message')): ?>
                 <div class="alert alert-success" id="message">
-                    <h3 class=" text-center text-success"> {{ Session::get('message') }}</h3>
+                    <h3 class=" text-center text-success"> <?php echo e(Session::get('message')); ?></h3>
                 </div>
-            @endif
+            <?php endif; ?>
             
-            @if(Session::get('er_message'))
+            <?php if(Session::get('er_message')): ?>
                 <div class="alert alert-danger" >
-                    <h3 class=" text-center text-danger">{{ Session::get('er_message') }} is not Available</h3>
+                    <h3 class=" text-center text-danger"><?php echo e(Session::get('er_message')); ?> is not Available</h3>
                 </div>
-            @endif
+            <?php endif; ?>
             <div class=" card card-default">
-                @if ($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
              
                 <div class="container">
                     <div class="panel-body col-md-12 ">
                         <br/>
-                        <form action="{{ route('add-to-cart') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                            {{ csrf_field() }}
+                        <form action="<?php echo e(route('add-to-cart')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <?php echo e(csrf_field()); ?>
+
 
                             <div class="form-group">
                                 <div class="row">
@@ -71,9 +72,9 @@ nav-expanded nav-active
                                     <div class="form-group col-md-9">
                                         <select class="form-control" name="product_id" onchange="productPrice(this.value)">
                                             <option value="">Select Product</option>
-                                            @foreach($obj_product as $product)
-                                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
-                                            @endforeach
+                                            <?php $__currentLoopData = $obj_product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($product->id); ?>"><?php echo e($product->product_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
          
                                     </div>
@@ -88,7 +89,7 @@ nav-expanded nav-active
 
                                     <div class="form-group col-md-9" id="product_price">
                                         <input type="text" class="form-control"  name="product_price" required>
-                                        <span class="text-danger">{{ $errors->has('product_price') ? $errors->first('product_price') : ' ' }}</span>
+                                        <span class="text-danger"><?php echo e($errors->has('product_price') ? $errors->first('product_price') : ' '); ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +102,7 @@ nav-expanded nav-active
 
                                     <div class="form-group col-md-9">
                                         <input type="text" class="form-control" name="product_quantity" required>
-                                        <span class="text-danger">{{ $errors->has('product_quantity') ? $errors->first('product_quantity') : ' ' }}</span>
+                                        <span class="text-danger"><?php echo e($errors->has('product_quantity') ? $errors->first('product_quantity') : ' '); ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -147,44 +148,42 @@ nav-expanded nav-active
                             <th> total </th>
                             <th>Action</th>
                         </tr>
-                        @php($i = 0)
-                        @php($sum = 0)
-                        @foreach($cartProducts as $cartProduct)
+                        <?php ($i = 0); ?>
+                        <?php ($sum = 0); ?>
+                        <?php $__currentLoopData = $cartProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td>{{ ++$i }}</td>
+                                <td><?php echo e(++$i); ?></td>
                                 <td>
-                                          @if( $cartProduct->options-> image!=null)
-                                    <img src="{{ asset($cartProduct->options-> image) }}" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
-                                    @else 
-                                    <img src="{{ asset('images/medicine.png') }}" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
-                                    @endif
-                                    {{ $cartProduct-> name}}</td>
-                                <td>{{ $cartProduct-> price}}</td>
-                                <td>{{ $cartProduct-> qty}}</td>
+                                          <?php if( $cartProduct->options-> image!=null): ?>
+                                    <img src="<?php echo e(asset($cartProduct->options-> image)); ?>" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
+                                    <?php else: ?> 
+                                    <img src="<?php echo e(asset('images/medicine.png')); ?>" class="img-thumbnail" alt="image" style="height:50px;wide:50px">
+                                    <?php endif; ?>
+                                    <?php echo e($cartProduct-> name); ?></td>
+                                <td><?php echo e($cartProduct-> price); ?></td>
+                                <td><?php echo e($cartProduct-> qty); ?></td>
                                 <td>
-                                    @php($sum+=$cartProduct-> qty* $cartProduct-> price) 
+                                    <?php ($sum+=$cartProduct-> qty* $cartProduct-> price); ?> 
                                      
-                                    {{ $cartProduct-> qty* $cartProduct-> price }}
+                                    <?php echo e($cartProduct-> qty* $cartProduct-> price); ?>
+
                                 </td>
                                 <td>
                      
-                                    {{-- <a href="{{ url('admin/product/edit/'.$cartProduct->id) }}" data-toggle="tooltip" data-placement="top"
-                                       class="btn btn-success btn-xs" title="Edit">
-                                        <span class="fa fa-edit"></span>
-                                    </a>  --}}
-                                    <a href="{{ route('delete-cart-item', ['rowId'=>$cartProduct->rowId]) }}"data-toggle="tooltip" data-placement="top"
+                                    
+                                    <a href="<?php echo e(route('delete-cart-item', ['rowId'=>$cartProduct->rowId])); ?>"data-toggle="tooltip" data-placement="top"
                                        class="btn btn-danger btn-xs" title="Delete">
                                         <span class="fa fa-trash"></span>
                                     </a>
                                  </td>
                             </tr>
-                        @endforeach 
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
                     </table>
                     <div>
                          <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p class="h6 text-dark"> Total Cost: {{ $sum }}</p>
+                                        <p class="h6 text-dark"> Total Cost: <?php echo e($sum); ?></p>
                                     </div>
 
                                 </div>
@@ -192,15 +191,15 @@ nav-expanded nav-active
                            
                     </div>
                  <div class="pull-right">
-                        <a href="{{ route('remove-all-cart') }}"data-toggle="tooltip" data-placement="top"
+                        <a href="<?php echo e(route('remove-all-cart')); ?>"data-toggle="tooltip" data-placement="top"
                              class="btn btn-danger btn-xs" title="Delete">
                                 <span class="fa fa-trash"></span> Remove All
                         </a>
-                        <a href="{{ route('invoice',['id'=>$customer_id]) }}"data-toggle="tooltip" data-placement="top"
+                        <a href="<?php echo e(route('invoice',['id'=>$customer_id])); ?>"data-toggle="tooltip" data-placement="top"
                              class="btn btn-facebook btn-xs" title="Invoice">
                          <span class="fa fa-trash"></span> Invoice
                         </a>
-                        <a href="{{ route('checkout',['id'=>$customer_id]) }}"data-toggle="tooltip" data-placement="top"
+                        <a href="<?php echo e(route('checkout',['id'=>$customer_id])); ?>"data-toggle="tooltip" data-placement="top"
                              class="btn btn-info btn-xs" title="Checkout">
                          <span class="fa fa-trash"></span> Checkout
                         </a>
@@ -218,13 +217,9 @@ nav-expanded nav-active
 
 <script>
 
-   {{-- setTimeout(function(){
-       location.reload();
-   },3000); --}}
+   
 
-    {{-- setInterval(function(){
-   $('#my_div').load('/');
-}, 2000) /* time in milliseconds (ie 2 seconds)*/ --}}
+    
 
 
     function productPrice(id) {
@@ -245,4 +240,5 @@ nav-expanded nav-active
 </script>
    
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('back-end.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

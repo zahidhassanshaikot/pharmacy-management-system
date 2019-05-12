@@ -7,6 +7,7 @@ use Cart;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\ProductSale;
+use PDF;
 
 class CartController extends Controller
 {
@@ -76,6 +77,36 @@ class CartController extends Controller
         }
         Cart::destroy();
         return redirect()->route('add-customer')->with('message','Product Successfully Checkout.');
+
+    }
+    public function invoice($customer_id){
+        $cartProducts=Cart::content();
+        $customer=Customer::find($customer_id);
+        //  return $customer;
+       
+        foreach($cartProducts as $cartProduct){
+            $product = Product::find($cartProduct->id);
+            if($cartProduct->qty > $product->product_quantity){
+            
+            return redirect()->back()->with('er_message',$product->product_name);
+            
+            } 
+        }
+        $total=0;
+        foreach($cartProducts as $cartProduct){
+            $total=$total+$cartProduct->subtotal;
+
+        }
+
+ $pdf = PDF::loadView('back-end.pdf.invoice', [
+        'cartProducts'=>$cartProducts,
+        'customer'=>$customer,
+        'total'=>$total,
+
+    ]);
+// return $pdf->download('payslip.pdf');
+return $pdf->stream();
+
 
     }
 

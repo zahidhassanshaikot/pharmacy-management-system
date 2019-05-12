@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'verified:ture']], function () {
         Route::get('/delete-cart-item/{id}', 'CartController@removeFromCart')->name('delete-cart-item');
         Route::get('/remove-all-cart', 'CartController@removeAllFromCart')->name('remove-all-cart');
         Route::get('/checkout/{id}', 'CartController@checkout')->name('checkout');
+        Route::get('/invoice/{id}', 'CartController@invoice')->name('invoice');
 
         //customer
         Route::get('/add/customer', 'CustomerController@customerAdd')->name('add-customer');
