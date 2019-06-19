@@ -1,19 +1,18 @@
-@extends('back-end.master')
-@section('title')
+<?php $__env->startSection('title'); ?>
 User
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('activeUser')
+<?php $__env->startSection('activeUser'); ?>
 active
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <section role="main" class="content-body">
     <header class="page-header page-header-left-breadcrumb">
         <div class="right-wrapper">
             <ol class="breadcrumbs">
                 <li>
-                    <a href="{{ route('/') }}">
+                    <a href="<?php echo e(route('/')); ?>">
                         <i class="fas fa-home"></i>
                     </a>
                 </li>
@@ -21,98 +20,98 @@ active
                 <li><span>User Info</span></li>
             </ol>
     
-            {{-- <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a> --}}
+            
         </div>
     
         <h2>User Info</h2>
     </header>
 
-    @if(Auth::user()->hasRole(['Super Admin', 'Admin']))
+    <?php if(Auth::user()->hasRole(['Super Admin', 'Admin'])): ?>
     <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            @if(Session::get('message'))
+            <?php if(Session::get('message')): ?>
                 <div class="alert alert-success" id="message">
-                    <h3 class=" text-center text-success"> {{ Session::get('message') }}</h3>
+                    <h3 class=" text-center text-success"> <?php echo e(Session::get('message')); ?></h3>
                 </div>
-            @endif
+            <?php endif; ?>
             <div class=" panel panel-default">
-                @if ($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
                 <div onclick="btnToggleFunction()" class="panel-header btn btn-default btn-block">
                     <a><h3 class="center"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add New User</h3></a>
                 </div>
 
                 <div id="IdToggleBtn" style="display: none" class="panel-body ">
                     <br/>
-                    <form method="POST" action="{{ route('register-new-user') }}">
-                        @csrf
+                    <form method="POST" action="<?php echo e(route('register-new-user')); ?>">
+                        <?php echo csrf_field(); ?>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Name')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text"
-                                       class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
-                                       value="{{ old('name') }}" required autofocus>
+                                       class="form-control<?php echo e($errors->has('name') ? ' is-invalid' : ''); ?>" name="name"
+                                       value="<?php echo e(old('name')); ?>" required autofocus>
 
-                                @if ($errors->has('name'))
+                                <?php if($errors->has('name')): ?>
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong><?php echo e($errors->first('name')); ?></strong>
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="email"
-                                   class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                   class="col-md-4 col-form-label text-md-right"><?php echo e(__('E-Mail Address')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email"
-                                       class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
-                                       value="{{ old('email') }}" required>
+                                       class="form-control<?php echo e($errors->has('email') ? ' is-invalid' : ''); ?>" name="email"
+                                       value="<?php echo e(old('email')); ?>" required>
 
-                                @if ($errors->has('email'))
+                                <?php if($errors->has('email')): ?>
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong><?php echo e($errors->first('email')); ?></strong>
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="password"
-                                   class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                   class="col-md-4 col-form-label text-md-right"><?php echo e(__('Password')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password"
-                                       class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                       class="form-control<?php echo e($errors->has('password') ? ' is-invalid' : ''); ?>"
                                        name="password" title="Must contain at least one number and one uppercase and lowercase letter,spacial character and at least 6 or more characters" required>
 
-                                @if ($errors->has('password'))
+                                <?php if($errors->has('password')): ?>
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong><?php echo e($errors->first('password')); ?></strong>
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="password-confirm"
-                                   class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                   class="col-md-4 col-form-label text-md-right"><?php echo e(__('Confirm Password')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
                                        name="password_confirmation" required>
-                                <span class="text-danger">{{ $errors->has('password_confirmation') ? $errors->first('password_confirmation') : ' ' }}</span>
+                                <span class="text-danger"><?php echo e($errors->has('password_confirmation') ? $errors->first('password_confirmation') : ' '); ?></span>
                             </div>
                         </div>
 
@@ -122,11 +121,11 @@ active
                             <div class="col-md-6">
                                 <select class="form-control" name="user_role">
 
-                                    @foreach($roles as $role)
-                                        @if($role->name !='Super Admin')
-                                            <option value="{{$role->name}}">{{ $role->name }}</option>
-                                        @endif
-                                    @endforeach
+                                    <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($role->name !='Super Admin'): ?>
+                                            <option value="<?php echo e($role->name); ?>"><?php echo e($role->name); ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -144,7 +143,7 @@ active
         </div>
     </div>
    </div>
-    @endif
+    <?php endif; ?>
 
 
     <br/>
@@ -165,20 +164,20 @@ active
                                     <th>SL no</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    {{--<th>Action</th>--}}
+                                    
                                 </tr>
-                                @php($i=1)
-                                @foreach($userEditors as $userEditor)
+                                <?php ($i=1); ?>
+                                <?php $__currentLoopData = $userEditors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userEditor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="">
-                                        <th>{{$i++}}</th>
-                                        <th>{{$userEditor->name}}</th>
-                                        <th>{{$userEditor->email}}</th>
-                                        {{--<th></th>--}}
+                                        <th><?php echo e($i++); ?></th>
+                                        <th><?php echo e($userEditor->name); ?></th>
+                                        <th><?php echo e($userEditor->email); ?></th>
+                                        
                                     </tr>
 
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </table>
-                            <a href="{{ route('all-user-list',['role'=>'Manager']) }}" class="text-uppercase float-right">
+                            <a href="<?php echo e(route('all-user-list',['role'=>'Manager'])); ?>" class="text-uppercase float-right">
                                (View all)</a>
 
                         </div>
@@ -200,20 +199,20 @@ active
                                     <th>SL no</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    {{--<th>Action</th>--}}
+                                    
                                 </tr>
-                                @php($i=1)
-                                @foreach($userAdmins as $admin)
+                                <?php ($i=1); ?>
+                                <?php $__currentLoopData = $userAdmins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $admin): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="">
-                                        <th>{{$i++}}</th>
-                                        <th>{{$admin->name}}</th>
-                                        <th>{{$admin->email}}</th>
-                                        {{--<th></th>--}}
+                                        <th><?php echo e($i++); ?></th>
+                                        <th><?php echo e($admin->name); ?></th>
+                                        <th><?php echo e($admin->email); ?></th>
+                                        
                                     </tr>
 
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </table>
-                            <a href="{{ route('all-user-list',['role'=>'Admin']) }}" class="text-uppercase float-right">
+                            <a href="<?php echo e(route('all-user-list',['role'=>'Admin'])); ?>" class="text-uppercase float-right">
                                 (View all)</a>
 
                         </div>
@@ -236,20 +235,20 @@ active
                                     <th>SL no</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    {{--<th>Action</th>--}}
+                                    
                                 </tr>
-                                @php($i=1)
-                                @foreach($userSellsMan as $sellsMan)
+                                <?php ($i=1); ?>
+                                <?php $__currentLoopData = $userSellsMan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sellsMan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="">
-                                        <th>{{$i++}}</th>
-                                        <th>{{$sellsMan->name}}</th>
-                                        <th>{{$sellsMan->email}}</th>
-                                        {{--<th></th>--}}
+                                        <th><?php echo e($i++); ?></th>
+                                        <th><?php echo e($sellsMan->name); ?></th>
+                                        <th><?php echo e($sellsMan->email); ?></th>
+                                        
                                     </tr>
 
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </table>
-                            <a href="{{ route('all-user-list',['role'=>'Salls Man']) }}" class="text-uppercase float-right">
+                            <a href="<?php echo e(route('all-user-list',['role'=>'Salls Man'])); ?>" class="text-uppercase float-right">
                                 (View all)</a>
 
                         </div>
@@ -266,4 +265,5 @@ active
 </section>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('back-end.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

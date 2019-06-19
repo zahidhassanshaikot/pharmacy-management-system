@@ -1,27 +1,27 @@
    
-@extends('back-end.master')
-@section('title')
+
+<?php $__env->startSection('title'); ?>
 PMS
-@endsection
-@section('appUser')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('appUser'); ?>
 active
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <section role="main" class="content-body">
     <header class="page-header page-header-left-breadcrumb">
         <div class="right-wrapper">
             <ol class="breadcrumbs">
                 <li>
-                    <a href="{{ route('/') }}">
+                    <a href="<?php echo e(route('/')); ?>">
                         <i class="fas fa-home"></i>
                     </a>
                 </li>
-                {{-- <li><span>Layouts</span></li> --}}
+                
                 <li><span>Deshboard</span></li>
             </ol>
     
-            {{-- <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a> --}}
+            
         </div>
     
         <h2>Deshboard</h2>
@@ -50,14 +50,14 @@ active
 												</tr>
 											</thead>
 											<tbody>
-                                                @foreach($obj_customer as $customer)
+                                                <?php $__currentLoopData = $obj_customer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 												<tr>
-													<td>{{ $customer->id }}</td>
-													<td>{{ $customer->customer_name }}</td>
-													<td>{{ $customer->customer_phone }}</td>
+													<td><?php echo e($customer->id); ?></td>
+													<td><?php echo e($customer->customer_name); ?></td>
+													<td><?php echo e($customer->customer_phone); ?></td>
 													
 												</tr>
-											@endforeach
+											<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 											</tbody>
 										</table>
 									</div>
@@ -78,12 +78,12 @@ active
                                     <div class="summary">
                                         <h4 class="title">Total Customer</h4>
                                         <div class="info">
-                                            <strong class="amount">{{ $total_customer }}</strong>
-                                            {{-- <span class="text-primary">(14 unread)</span> --}}
+                                            <strong class="amount"><?php echo e($total_customer); ?></strong>
+                                            
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="{{ route('customer-list') }}">(view all)</a>
+                                        <a class="text-muted text-uppercase" href="<?php echo e(route('customer-list')); ?>">(view all)</a>
                                     </div>
                                 </div>
                             </div>
@@ -96,15 +96,14 @@ active
                             <div class="widget-summary">
                                 <div class="widget-summary-col widget-summary-col-icon">
                                     <div class="summary-icon bg-primary">
-                                        <i class="fas fa-money-bill-wave"></i>
-
+                                        <i class="fas fa-dollar-sign"></i>
                                     </div>
                                 </div>
                                 <div class="widget-summary-col">
                                     <div class="summary">
-                                        <h4 class="title">Total Sell</h4>
+                                        <h4 class="title">Total Sale</h4>
                                         <div class="info">
-                                            <strong class="amount">৳ {{ $total_sale }}</strong>
+                                            <strong class="amount">$ <?php echo e($total_sale); ?></strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
@@ -123,14 +122,14 @@ active
                             <div class="widget-summary">
                                 <div class="widget-summary-col widget-summary-col-icon">
                                     <div class="summary-icon bg-info">
-                                        <i class="fas fa-money-bill-wave"></i>
+                                        <i class="fas fa-dollar-sign"></i>
                                     </div>
                                 </div>
                                 <div class="widget-summary-col">
                                     <div class="summary">
-                                        <h4 class="title">Today's Sell</h4>
+                                        <h4 class="title">Today's Sale</h4>
                                         <div class="info">
-                                            <strong class="amount">৳ {{ $todays_sale }}</strong>
+                                            <strong class="amount">$ <?php echo e($todays_sale); ?></strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
@@ -154,11 +153,11 @@ active
                                     <div class="summary">
                                         <h4 class="title">Today's Customer</h4>
                                         <div class="info">
-                                            <strong class="amount">{{ $todays_customer }}</strong>
+                                            <strong class="amount"><?php echo e($todays_customer); ?></strong>
                                         </div>
                                     </div>
                                     <div class="summary-footer">
-                                        <a class="text-muted text-uppercase" href="{{ route('customer-list') }}">(report)</a>
+                                        <a class="text-muted text-uppercase" href="<?php echo e(route('customer-list')); ?>">(report)</a>
                                     </div>
                                 </div>
                             </div>
@@ -172,4 +171,5 @@ active
 
     <!-- end: page -->
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('back-end.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

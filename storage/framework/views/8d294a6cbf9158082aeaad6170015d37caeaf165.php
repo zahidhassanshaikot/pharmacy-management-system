@@ -6,13 +6,13 @@
             
                 <ul class="nav nav-main">
                     <li>
-                        <a href="{{ route('/') }}">
+                        <a href="<?php echo e(route('/')); ?>">
                             <i class="fas fa-home" aria-hidden="true"></i>
                             <span>Dashboard</span>
                         </a>                        
                     </li>
-                    @if(Auth::user()->hasRole(['Super Admin', 'Admin','Manager']))
-                    <li class="nav-parent @yield('activeStock')">
+                    <?php if(Auth::user()->hasRole(['Super Admin', 'Admin','Manager'])): ?>
+                    <li class="nav-parent <?php echo $__env->yieldContent('activeStock'); ?>">
                         <a href="#">
                             <i class="fab fa-stack-exchange" aria-hidden="true"></i>
                             <span>Stock</span>
@@ -20,47 +20,31 @@
                         
                         <ul class="nav nav-children">
                             <li>
-                                <a href="{{ route('manage-stock') }}">
+                                <a href="<?php echo e(route('manage-stock')); ?>">
                                     Manage Stock
                                 </a>
                             </li>
                           
-                            {{-- <li class="nav-parent">
-                                <a>
-                                    Boxed
-                                </a>
-                                <ul class="nav nav-children">
-                                    <li>
-                                        <a href="layouts-boxed.html">
-                                            Static Header
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="layouts-boxed-fixed-header.html">
-                                            Fixed Header
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> --}}
+                            
 
                         </ul>
                         
 
                     </li>
-                    @endif
-                    <li class="nav-parent @yield('activeSaleProduct')">
+                    <?php endif; ?>
+                    <li class="nav-parent <?php echo $__env->yieldContent('activeSaleProduct'); ?>">
                         <a href="#">
                             <i class="fab fa-product-hunt" aria-hidden="true"></i>
                             <span>Sell Product</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a href="{{ route('add-customer') }}">
-                                    Sell Product
+                                <a href="<?php echo e(route('add-customer')); ?>">
+                                    Sale Product
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('customer-view') }}">
+                                <a href="<?php echo e(route('customer-view')); ?>">
                                     Customer View Page
                                 </a>
                             </li>
@@ -69,34 +53,34 @@
                         </ul>
 
                     </li>
-                    <li class="@yield('activeSaleProduct')">
-                        <a href="{{ route('customer-list') }}">
+                    <li class="<?php echo $__env->yieldContent('activeSaleProduct'); ?>">
+                        <a href="<?php echo e(route('customer-list')); ?>">
                             <i class="fas fa-users" aria-hidden="true"></i>
                             <span>Customer List</span>
                         </a>                        
                     </li>
-                    @if(Auth::user()->hasRole(['Super Admin', 'Admin']))
-                    <li class="@yield('activeUser')">
-                        <a href="{{ route('view-user-list') }}">
+                    <?php if(Auth::user()->hasRole(['Super Admin', 'Admin'])): ?>
+                    <li class="<?php echo $__env->yieldContent('activeUser'); ?>">
+                        <a href="<?php echo e(route('view-user-list')); ?>">
                             <i class="fas fa-user" aria-hidden="true"></i>
                             <span>User Management</span>
                         </a>                        
                     </li>
 
-                    <li class="nav-parent @yield('activeReport')">
+                    <li class="nav-parent <?php echo $__env->yieldContent('activeReport'); ?>">
                         <a href="#">
                             <i class="fas fa-chart-bar" aria-hidden="true"></i>
                             <span>Report</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a href="{{ route('most-sale-product') }}">
+                                <a href="<?php echo e(route('most-sale-product')); ?>">
                                     Most Sell Product
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="{{ route('did-not-take-full-course') }}">
+                                <a href="<?php echo e(route('did-not-take-full-course')); ?>">
                                     Full Course Not Taken
                                 </a>
                             </li>
@@ -107,7 +91,7 @@
 
                     </li>
            
-                    @endif
+                    <?php endif; ?>
                 
                 </ul>
             </nav>

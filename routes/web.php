@@ -50,14 +50,14 @@ Route::group(['middleware' => ['auth', 'verified:ture']], function () {
         //product
         Route::get('/sale-product/{id}', 'ProductSaleController@saleProduct')->name('sale-product');
         Route::get('/get-product-cost/{id}', 'ProductSaleController@getProductCost')->name('get-product-cost');
-        Route::get('/customer/view', 'ProductSaleController@customerViewPage')->name('customer-view');
+        
 
         //card
         Route::post('/add-to-cart', 'CartController@addToCart')->name('add-to-cart');
         Route::get('/delete-cart-item/{id}', 'CartController@removeFromCart')->name('delete-cart-item');
         Route::get('/remove-all-cart', 'CartController@removeAllFromCart')->name('remove-all-cart');
         Route::get('/checkout/{id}', 'CartController@checkout')->name('checkout');
-        Route::get('/invoice/{id}', 'CartController@invoice')->name('invoice');
+        Route::post('/invoice', 'CartController@invoice')->name('invoice');
 
         //customer
         Route::get('/add/customer', 'CustomerController@customerAdd')->name('add-customer');
@@ -73,5 +73,6 @@ Route::group(['middleware' => ['auth', 'verified:ture']], function () {
     });
 
 });
+Route::get('/customer/view', 'ProductSaleController@customerViewPage')->name('customer-view');
 Auth::routes(['verify' => true]);
 // Auth::routes();

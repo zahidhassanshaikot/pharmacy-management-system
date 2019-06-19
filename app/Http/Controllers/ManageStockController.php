@@ -59,6 +59,72 @@ class ManageStockController extends Controller
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function addProductAPI(Request $request){
+
+        $obj_product = new Product();
+
+
+        $data=json_decode($request->details);
+        $obj_product->product_name = $data->product_name;
+        $obj_product->company_name = $data->company_name;
+        $obj_product->group_name = $data->group_name;
+        $obj_product->product_price = $data->product_price;
+        $obj_product->product_quantity = $data->product_quantity;
+        $obj_product->product_description = $data->product_description;
+        $obj_product->publication_status =1;
+
+        $obj_product->save();
+        return response()->json(array(
+            'response' => 'success'));
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function unpublishedProduct($id){
             $obj_product=Product::find($id);
             $obj_product->publication_status = 0;
@@ -130,4 +196,5 @@ class ManageStockController extends Controller
 
         return redirect()->route('manage-stock')->with('message','Product Info update successfully');
     }
+    
 }

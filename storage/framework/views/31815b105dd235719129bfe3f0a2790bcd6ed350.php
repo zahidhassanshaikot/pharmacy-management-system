@@ -70,10 +70,7 @@ textarea:hover, textarea:focus, #items td.total-value textarea:hover, #items td.
 
     </style>
 
-	{{--  <link rel='stylesheet' type='text/css' href='css/style.css' />
-	<link rel='stylesheet' type='text/css' href='css/print.css' media="print" />
-	<script type='text/javascript' src='js/jquery-1.3.2.min.js'></script>
-	<script type='text/javascript' src='js/example.js'></script>  --}}
+	
 
 </head>
 
@@ -92,8 +89,9 @@ Shahjahanpur
 Phone: 01685164248
 
 <br/>
-Customer Name:{{ $customer->customer_name }}<br/>
-Customer Phone:{{ $customer->customer_phone }}
+Customer Name:<?php echo e($customer->customer_name); ?><br/>
+Customer Phone:<?php echo e($customer->customer_phone); ?>
+
 
 </textarea>
 
@@ -108,45 +106,45 @@ Customer Phone:{{ $customer->customer_phone }}
 		  <tr>
 		      <th>Item</th>
 		      <th>Company Name</th>
-		      {{--  <th>Group Name</th>  --}}
+		      
 		      <th>Unit Cost</th>
 		      <th>Quantity</th>
 		      <th>Price</th>
 		  </tr>
-		  @foreach($cartProducts as $cartProduct)
+		  <?php $__currentLoopData = $cartProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 		  <tr class="item-row">
-		      <td class="item-name"><div ><textarea>{{ $cartProduct->name }}</textarea></div></td>
-		      <td class="description"><textarea>{{ $cartProduct->options->company_name }}</textarea></td>
-		      {{--  <td class="description"><textarea>{{ $cartProduct->options->company_name }}</textarea></td>  --}}
-		      {{--  <td >{{ $cartProduct->options->group_name }}</td>  --}}
-		      <td><textarea class="cost">{{ $cartProduct->price }}</textarea></td>
-		      <td><textarea class="qty">{{ $cartProduct->qty }}</textarea></td>
-		      <td><span class="price">{{  $cartProduct->subtotal }}</span></td>
+		      <td class="item-name"><div ><textarea><?php echo e($cartProduct->name); ?></textarea></div></td>
+		      <td class="description"><textarea><?php echo e($cartProduct->options->company_name); ?></textarea></td>
+		      
+		      
+		      <td><textarea class="cost"><?php echo e($cartProduct->price); ?></textarea></td>
+		      <td><textarea class="qty"><?php echo e($cartProduct->qty); ?></textarea></td>
+		      <td><span class="price"><?php echo e($cartProduct->subtotal); ?></span></td>
 		  </tr>
-		  @endforeach
+		  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	
 	  
 		  <tr>
 		      <td colspan="2" class="blank"> </td>
 		      <td colspan="2" class="total-line">Subtotal</td>
-		      <td class="total-value"><div id="Total">{{ $total }}</div></td>
+		      <td class="total-value"><div id="Total"><?php echo e($total); ?></div></td>
 		  </tr>
 		  <tr>
 
 		      <td colspan="2" class="blank"> </td>
 		      <td colspan="2" class="total-line">VAT</td>
-		      <td class="total-value"><div id="total">{{ $vat }}%</div></td>
+		      <td class="total-value"><div id="total"><?php echo e($vat); ?>%</div></td>
 		  </tr>
 		  <tr>
 		      <td colspan="2" class="blank"> </td>
 		      <td colspan="2" class="total-line">Discount</td>
 
-		      <td class="total-value"><textarea id="paid">{{ $discount }}%</textarea></td>
+		      <td class="total-value"><textarea id="paid"><?php echo e($discount); ?>%</textarea></td>
 		  </tr>
 		  <tr>
 		      <td colspan="2" class="blank"> </td>
 		      <td colspan="2" class="total-line balance">Total</td>
-		      <td class="total-value balance"><div class="due">{{ $calculation }}</div></td>
+		      <td class="total-value balance"><div class="due"><?php echo e($calculation); ?></div></td>
 		  </tr>
 		
 		</table>

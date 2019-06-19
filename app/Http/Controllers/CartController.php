@@ -83,7 +83,9 @@ class CartController extends Controller
         return redirect()->route('add-customer')->with('message','Product Successfully Checkout.');
 
     }
-    public function invoice($customer_id){
+    public function invoice(Request $request){
+        $customer_id=$request->id;
+        // return $request;
         $cartProducts=Cart::content();
         $customer=Customer::find($customer_id);
         //  return $customer;
@@ -101,11 +103,16 @@ class CartController extends Controller
             $total=$total+$cartProduct->subtotal;
 
         }
+        $calculation= $total-($total*$request->vat/100)-($total*$request->discount/100);
+        // return $calculation;
 
  $pdf = PDF::loadView('back-end.pdf.invoice', [
         'cartProducts'=>$cartProducts,
         'customer'=>$customer,
         'total'=>$total,
+        'vat'=>$request->vat,
+        'discount'=>$request->discount,
+        'calculation'=>$calculation,
 
     ]);
 // return $pdf->download('payslip.pdf');
