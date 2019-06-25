@@ -103,7 +103,7 @@ class CartController extends Controller
             $total=$total+$cartProduct->subtotal;
 
         }
-        $calculation= $total-($total*$request->vat/100)-($total*$request->discount/100);
+        $calculation= $total+($total*$request->vat/100)-($total*$request->discount/100);
         // return $calculation;
 
  $pdf = PDF::loadView('back-end.pdf.invoice', [
