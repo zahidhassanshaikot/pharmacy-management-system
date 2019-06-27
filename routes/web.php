@@ -49,14 +49,23 @@ Route::group(['middleware' => ['auth', 'verified:ture']], function () {
 
         //product
         Route::get('/sale-product/{id}', 'ProductSaleController@saleProduct')->name('sale-product');
+        Route::get('/sale-product/qr-code/{id}', 'ProductSaleController@saleProductByQRcode')->name('sale-product-by-qrcode');
         Route::get('/get-product-cost/{id}', 'ProductSaleController@getProductCost')->name('get-product-cost');
         
+
+        Route::get('/delete-qrcode-item/{id}', 'ProductSaleController@deleteQrcodeItem')->name('delete-qrcode-item');
+        Route::get('/sell-by-qrcode/{id}', 'ProductSaleController@sellByQrcode')->name('sell-by-qrcode');
+        Route::post('/update-product-from-app', 'ProductSaleController@updateProductFromApp')->name('update-product-from-app');
+        Route::get('/remove-all-app-product', 'ProductSaleController@removeAllAppProduct')->name('remove-all-app-product');
+        Route::post('/invoice-app-product', 'ProductSaleController@invoiceAppProduct')->name('invoice-app-product');
+        Route::get('/checkout-app-product/{id}', 'ProductSaleController@checkoutAppProduct')->name('checkout-app-product');
 
         //card
         Route::post('/add-to-cart', 'CartController@addToCart')->name('add-to-cart');
         Route::get('/delete-cart-item/{id}', 'CartController@removeFromCart')->name('delete-cart-item');
         Route::get('/remove-all-cart', 'CartController@removeAllFromCart')->name('remove-all-cart');
         Route::get('/checkout/{id}', 'CartController@checkout')->name('checkout');
+
         Route::post('/invoice', 'CartController@invoice')->name('invoice');
 
         //customer

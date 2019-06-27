@@ -11,7 +11,7 @@ use App\Product;
 use Illuminate\Support\Facades\Session;
 use File;
 use Image;
-
+use App\ProductFromApp;
 
 class ManageStockController extends Controller
 {
@@ -92,6 +92,30 @@ class ManageStockController extends Controller
 
 
     }
+
+
+    public function sellProductAPI(Request $request){
+
+        $obj_product = new ProductFromApp();
+
+
+        $data=json_decode($request->details);
+        $obj_product->product_id = $data->product_id;
+        $obj_product->product_name = $data->product_name;
+        $obj_product->product_price = $data->product_price;
+        $obj_product->company_name = $data->company_name;
+        $obj_product->group_name = $data->group_name;
+        // $obj_product->product_quantity = $data->product_quantity;
+        // $obj_product->product_need = $data->product_need;
+
+
+        $obj_product->save();
+        return response()->json(array(
+            'response' => 'success'));
+
+
+    }
+    
 
 
 

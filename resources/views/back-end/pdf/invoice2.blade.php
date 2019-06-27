@@ -11,7 +11,7 @@
 .delete {
   display: none;
 }
-
+  
 
 * { margin: 0; padding: 0; }
 body { font: 14px/1.4 Georgia, serif; }
@@ -111,13 +111,13 @@ Customer Phone:{{ $customer->customer_phone }}
 		  </tr>
 		  @foreach($cartProducts as $cartProduct)
 		  <tr class="item-row">
-		      <td class="item-name"><div ><textarea>{{ $cartProduct->name }}</textarea></div></td>
-		      <td class="description"><textarea>{{ $cartProduct->options->company_name }}</textarea></td>
+		      <td class="item-name"><div ><textarea>{{ $cartProduct->product_name }}</textarea></div></td>
+		      <td class="description"><textarea>{{ $cartProduct->company_name }}</textarea></td>
 		      {{--  <td class="description"><textarea>{{ $cartProduct->options->company_name }}</textarea></td>  --}}
 		      {{--  <td >{{ $cartProduct->options->group_name }}</td>  --}}
-		      <td><textarea class="cost">{{ $cartProduct->price }}</textarea></td>
-		      <td><textarea class="qty">{{ $cartProduct->qty }}</textarea></td>
-		      <td><span class="price">{{  $cartProduct->subtotal }}</span></td>
+		      <td><textarea class="cost">{{ $cartProduct->product_price }}</textarea></td>
+		      <td><textarea class="qty">{{ $cartProduct->product_quantity }}</textarea></td>
+		      <td><span class="price">{{  $cartProduct->product_price * $cartProduct->product_quantity }}</span></td>
 		  </tr>
 		  @endforeach
 	

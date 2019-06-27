@@ -17,3 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
  Route::post('add/product', 'ManageStockController@addProductAPI');
+ Route::post('sell/product', 'ManageStockController@sellProductAPI');
