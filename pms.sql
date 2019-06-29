@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2019 at 09:51 AM
+-- Generation Time: Jun 27, 2019 at 10:29 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -83,6 +83,14 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('ex@gmail.com', '$2y$10$MMgWzPv06.VLTnf5CLCTWO9uhZ/j7IZfK56/v2FZSG5YddAPbwvo2', '2019-06-23 06:35:45'),
+('ex4useonly@gmail.com', '$2y$10$Mq2uY6koxrFTt.YhNJp64ukWqCnYO2aqw4D.IdEOZXwtvwSB1Wg7a', '2019-06-23 06:37:44');
+
 -- --------------------------------------------------------
 
 --
@@ -137,7 +145,26 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `product_name`, `company_name`, `group_name`, `product_price`, `product_quantity`, `product_description`, `product_image`, `publication_status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'fff', 'gg', 'gg', 30, 11, '30gfhhhh', 'images/20190325094955PMS5.jpg', 1, '2019-03-23 05:11:59', '2019-05-09 01:18:30', NULL),
 (2, 'ggg', NULL, NULL, 30, 1, NULL, NULL, 1, '2019-03-25 23:26:53', '2019-03-30 21:31:20', NULL),
-(3, 'napa', NULL, NULL, 2.5, 148, NULL, NULL, 1, '2019-03-25 23:27:10', '2019-05-11 23:55:08', NULL);
+(3, 'napa', NULL, NULL, 2.5, 146, NULL, NULL, 1, '2019-03-25 23:27:10', '2019-06-19 06:13:02', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_from_app`
+--
+
+CREATE TABLE `product_from_app` (
+  `id` int(10) NOT NULL,
+  `product_name` varchar(191) NOT NULL,
+  `company_name` varchar(191) DEFAULT NULL,
+  `group_name` varchar(191) DEFAULT NULL,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_price` int(100) DEFAULT NULL,
+  `product_quantity` int(100) DEFAULT '0',
+  `product_need` int(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -150,7 +177,7 @@ CREATE TABLE `product_sales` (
   `customer_id` int(10) UNSIGNED NOT NULL,
   `product_id` int(10) UNSIGNED NOT NULL,
   `product_price` float NOT NULL,
-  `product_quantity` int(11) NOT NULL,
+  `product_quantity` int(11) DEFAULT '0',
   `product_need` int(100) DEFAULT '0',
   `product_discount` float DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -171,7 +198,8 @@ INSERT INTO `product_sales` (`id`, `customer_id`, `product_id`, `product_price`,
 (6, 4, 1, 30, 10, 0, 0, '2019-03-30 21:35:39', '2019-03-30 21:35:39', NULL),
 (7, 3, 1, 30, 3, 20, 0, '2019-04-03 01:05:15', '2019-04-03 01:05:15', NULL),
 (8, 3, 1, 30, 2, 10, 0, '2019-05-09 01:18:30', '2019-05-09 01:18:30', NULL),
-(9, 4, 3, 2.5, 2, 2, 0, '2019-05-11 23:55:08', '2019-05-11 23:55:08', NULL);
+(9, 4, 3, 2.5, 2, 2, 0, '2019-05-11 23:55:08', '2019-05-11 23:55:08', NULL),
+(10, 4, 3, 2.5, 2, 2, 0, '2019-06-19 06:13:02', '2019-06-19 06:13:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -214,7 +242,6 @@ CREATE TABLE `role_user` (
 --
 
 INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
-(1, 2),
 (2, 1),
 (4, 3),
 (5, 2),
@@ -246,7 +273,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone_no`, `address`, `image`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ex', 'ex@gmail.com', NULL, NULL, NULL, '2019-05-08 18:00:00', '$2y$10$.bL9e64Y9khrc6pRbF0Ry.ETHUAow6BZ9hU7UbWG2CedyqVVnLLrK', 'fD0QiOfjWF3N8IxLYNUKfYUK3iOEiI08E9MKV9rv8lRjWqhedo4Fhbr1W20R', '2019-03-21 12:16:30', '2019-03-21 12:16:30'),
+(1, 'ex', 'ex@gmail.com', NULL, NULL, NULL, '2019-05-08 18:00:00', '$2y$10$.bL9e64Y9khrc6pRbF0Ry.ETHUAow6BZ9hU7UbWG2CedyqVVnLLrK', 'wxxCQDqf31LUrVB9YCvsM7grbWXYEmQUbbhfrc20fcbRTba5s14PRndk3BUi', '2019-03-21 12:16:30', '2019-03-21 12:16:30'),
 (2, 'Super Admin', 'superadmin@gmail.com', '01999999999', 'shukrabadh, Dhaka Bangladesh', 'images/20190402073829ProfilePic10.jpg', '2019-04-27 01:15:50', '$2y$10$80PtdnTih/5TCj92d760OOHXnKai620qpgcVl8sP.2UD1EFaTVKHO', 'iC16r8N1zfO9vvxqqkDM4kdbiABwPg3GrIGSFUPBmJSOwfFzADIpSUf71wTH', '2019-04-02 00:47:39', '2019-04-27 01:15:50'),
 (4, 'Manager', 'm@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$7fj6bFbefOEuAMhVgRzayeOaPwc4HL1ul6Wwa5zcnpIx1X0irxF7y', NULL, '2019-04-02 01:27:46', '2019-04-02 01:27:46'),
 (5, 'ex', 'ex4useonly@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$XCfOYJcsl5G6gpt4za2zoeJvpB1CF3VhrpzUWvtYP8i1fNQEc6MSi', NULL, '2019-04-27 01:00:39', '2019-04-27 01:00:39'),
@@ -293,6 +320,12 @@ ALTER TABLE `permission_role`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_from_app`
+--
+ALTER TABLE `product_from_app`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -351,10 +384,16 @@ ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `product_from_app`
+--
+ALTER TABLE `product_from_app`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `roles`

@@ -192,12 +192,12 @@ nav-expanded nav-active
                                 <td>
                                 
                                     <a href="{{ route('sale-product',['id'=>$customer->id]) }}"data-toggle="tooltip" data-placement="top"
-                                       class="btn btn-outline-info btn-xs" title="Sale Menual">
+                                       class="btn btn-outline-info btn-xs" title="Sell Manually">
                                        <span class="fas fa-cart-arrow-down"> </span>
                                     </a>
 
                                     <a href="{{ route('sell-by-qrcode',['id'=>$customer->id]) }}"data-toggle="tooltip" data-placement="top"
-                                       class="btn btn-outline-info btn-xs  bg-dark" title="Sale from QR Code">
+                                       class="btn btn-outline-info btn-xs  bg-dark" title="Sell From Q-R Code">
                                        <span class="fas fa-cart-arrow-down"> </span>
                                     </a>
 
